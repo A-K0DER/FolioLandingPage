@@ -30,15 +30,19 @@ afterEach(() => vi.restoreAllMocks());
 const call = (path: string, init: RequestInit) =>
   exports.default.fetch(new Request(`https://license.test${path}`, { method: "POST", ...init }));
 
+// Each call comes from a fresh IP unless a test pins one, so the rate limit doesn't affect other tests.
 const post = (path: string, body: unknown, headers: Record<string, string> = {}) =>
-  call(path, { headers: { "Content-Type": "application/json", ...headers }, body: JSON.stringify(body) });
+  call(path, {
+    headers: { "Content-Type": "application/json", "CF-Connecting-IP": `10.0.${++counter % 250}.${Math.floor(counter / 250)}`, ...headers },
+    body: JSON.stringify(body),
+  });
 
 function signedWebhook(event: unknown, opts: { id?: string; secret?: string } = {}) {
   const payload = JSON.stringify(event);
   const id = opts.id ?? `evt_${++counter}`;
   const ts = new Date();
   const sig = new Webhook(opts.secret ?? env.DODO_WEBHOOK_SECRET).sign(id, ts, payload);
-  return call("/api/dodo-webhook", {
+  return call("/api/public/dodo-webhook", {
     headers: {
       "Content-Type": "application/json",
       "webhook-id": id,
@@ -80,7 +84,7 @@ describe("webhook", () => {
   it("rejects a bad signature with 401 and does nothing", async () => {
     const res = await signedWebhook(paymentEvent("pay_bad"), { secret: "whsec_" + btoa("another-secret-another-secret!!") });
     expect(res.status).toBe(401);
-    expect((await call("/api/dodo-webhook", { body: "{}" })).status).toBe(401);
+    expect((await call("/api/public/dodo-webhook", { body: "{}" })).status).toBe(401);
     expect(sent).toHaveLength(0);
   });
 
@@ -130,7 +134,7 @@ describe("webhook", () => {
 describe("activation", () => {
   it("activates, and a repeat on the same Mac returns the same token", async () => {
     const { key } = await buy();
-    const first = await post("/api/activate", { key, machine: MAC_A });
+    const first = await post("/api/public/activate", { key, machine: MAC_A });
     expect(first.status).toBe(200);
     const { token } = (await first.json()) as { token: string };
     expect(token).toMatch(/^FOLIOACT-/);
@@ -138,52 +142,52 @@ describe("activation", () => {
     expect(details).toMatchObject({ machine: MAC_A, email: "ada@example.com", name: "Ada Lovelace", product: "folio" });
     expect(details.activated).toBe(new Date().toISOString().slice(0, 10));
 
-    const again = await post("/api/activate", { key, machine: MAC_A.toLowerCase() });
+    const again = await post("/api/public/activate", { key, machine: MAC_A.toLowerCase() });
     expect(again.status).toBe(200);
     expect(((await again.json()) as { token: string }).token).toBe(token);
   });
 
   it("gives a second Mac 409 with only the day; deactivate frees the seat for it", async () => {
     const { key } = await buy();
-    expect((await post("/api/activate", { key, machine: MAC_A })).status).toBe(200);
+    expect((await post("/api/public/activate", { key, machine: MAC_A })).status).toBe(200);
 
-    const blocked = await post("/api/activate", { key, machine: MAC_B });
+    const blocked = await post("/api/public/activate", { key, machine: MAC_B });
     expect(blocked.status).toBe(409);
     expect(await blocked.json()).toEqual({ error: "seat_in_use", since: new Date().toISOString().slice(0, 10) });
 
-    const freed = await post("/api/deactivate", { key, machine: MAC_A });
+    const freed = await post("/api/public/deactivate", { key, machine: MAC_A });
     expect(freed.status).toBe(200);
     expect(await freed.json()).toEqual({});
 
-    expect((await post("/api/activate", { key, machine: MAC_B })).status).toBe(200);
+    expect((await post("/api/public/activate", { key, machine: MAC_B })).status).toBe(200);
   });
 
   it("a Mac that doesn't hold the seat cannot free it", async () => {
     const { key } = await buy();
-    expect((await post("/api/deactivate", { key, machine: MAC_A })).status).toBe(404);
-    await post("/api/activate", { key, machine: MAC_A });
-    const res = await post("/api/deactivate", { key, machine: MAC_B });
+    expect((await post("/api/public/deactivate", { key, machine: MAC_A })).status).toBe(404);
+    await post("/api/public/activate", { key, machine: MAC_A });
+    const res = await post("/api/public/deactivate", { key, machine: MAC_B });
     expect(res.status).toBe(404);
     expect(await res.json()).toEqual({ error: "not_activated" });
-    expect((await post("/api/activate", { key, machine: MAC_B })).status).toBe(409);
+    expect((await post("/api/public/activate", { key, machine: MAC_B })).status).toBe(409);
   });
 
   it("refused as refunded after a refund, but deactivate still works", async () => {
     const { key, paymentId } = await buy();
-    await post("/api/activate", { key, machine: MAC_A });
+    await post("/api/public/activate", { key, machine: MAC_A });
     expect((await signedWebhook(refundEvent(paymentId))).status).toBe(200);
 
-    const res = await post("/api/activate", { key, machine: MAC_B });
+    const res = await post("/api/public/activate", { key, machine: MAC_B });
     expect(res.status).toBe(403);
     expect(await res.json()).toEqual({ error: "refunded" });
-    expect((await post("/api/activate", { key, machine: MAC_A })).status).toBe(403);
-    expect((await post("/api/deactivate", { key, machine: MAC_A })).status).toBe(200);
+    expect((await post("/api/public/activate", { key, machine: MAC_A })).status).toBe(403);
+    expect((await post("/api/public/deactivate", { key, machine: MAC_A })).status).toBe(200);
   });
 
   it("a partial refund does not revoke the license", async () => {
     const { key, paymentId } = await buy();
     await signedWebhook(refundEvent(paymentId, { is_partial: true, amount: 100 }));
-    expect((await post("/api/activate", { key, machine: MAC_A })).status).toBe(200);
+    expect((await post("/api/public/activate", { key, machine: MAC_A })).status).toBe(200);
   });
 
   it("rejects tampered, wrong-product and unknown-order keys with 403 invalid_key", async () => {
@@ -191,18 +195,18 @@ describe("activation", () => {
     const [d, s] = key.slice(6).split(".");
     const tampered = `FOLIO-${d.slice(0, 12)}${d[12] === "A" ? "B" : "A"}${d.slice(13)}.${s}`;
     for (const bad of [tampered, "FOLIO-abc.def", "garbage", ""]) {
-      const res = await post("/api/activate", { key: bad, machine: MAC_A });
+      const res = await post("/api/public/activate", { key: bad, machine: MAC_A });
       expect(res.status).toBe(403);
       expect(await res.json()).toEqual({ error: "invalid_key" });
     }
-    expect((await post("/api/deactivate", { key: tampered, machine: MAC_A })).status).toBe(403);
+    expect((await post("/api/public/deactivate", { key: tampered, machine: MAC_A })).status).toBe(403);
 
     const { signLicense } = await import("../src/crypto");
     const unknown = await signLicense(
       { email: "x@example.com", issued: "2026-10-18", name: "X", order: "pay_never_paid", product: "folio" },
       env.FOLIO_LICENSE_PRIVATE_KEY,
     );
-    const res = await post("/api/activate", { key: unknown, machine: MAC_A });
+    const res = await post("/api/public/activate", { key: unknown, machine: MAC_A });
     expect(res.status).toBe(403);
     expect(await res.json()).toEqual({ error: "invalid_key" });
   });
@@ -210,30 +214,43 @@ describe("activation", () => {
   it("rejects bad machine codes and malformed bodies with 400", async () => {
     const { key } = await buy();
     for (const machine of ["", "123", MAC_A + "0", "0011-2233-4455-6677-8899-AABB-CCDD-EEFF", "Z".repeat(32), 12345, null]) {
-      expect((await post("/api/activate", { key, machine })).status).toBe(400);
-      expect((await post("/api/deactivate", { key, machine })).status).toBe(400);
+      expect((await post("/api/public/activate", { key, machine })).status).toBe(400);
+      expect((await post("/api/public/deactivate", { key, machine })).status).toBe(400);
     }
-    expect((await post("/api/activate", { machine: MAC_A })).status).toBe(400);
-    expect((await call("/api/activate", { headers: { "Content-Type": "application/json" }, body: "{nope" })).status).toBe(400);
-    expect((await call("/api/activate", { headers: { "Content-Type": "text/plain" }, body: "{}" })).status).toBe(400);
+    expect((await post("/api/public/activate", { machine: MAC_A })).status).toBe(400);
+    expect((await call("/api/public/activate", { headers: { "Content-Type": "application/json" }, body: "{nope" })).status).toBe(400);
+    expect((await call("/api/public/activate", { headers: { "Content-Type": "text/plain" }, body: "{}" })).status).toBe(400);
   });
 
   it("refuses browser requests and sends no CORS headers", async () => {
     const { key } = await buy();
-    const res = await post("/api/activate", { key, machine: MAC_A }, { Origin: "https://evil.example" });
+    const res = await post("/api/public/activate", { key, machine: MAC_A }, { Origin: "https://evil.example" });
     expect(res.status).toBe(403);
     expect(res.headers.get("Access-Control-Allow-Origin")).toBeNull();
-    const ok = await post("/api/activate", { key, machine: MAC_A });
+    const ok = await post("/api/public/activate", { key, machine: MAC_A });
     expect(ok.headers.get("Access-Control-Allow-Origin")).toBeNull();
-    expect((await exports.default.fetch(new Request("https://license.test/api/activate", { method: "OPTIONS" }))).status).toBe(405);
+    expect((await exports.default.fetch(new Request("https://license.test/api/public/activate", { method: "OPTIONS" }))).status).toBe(405);
   });
 
   it("concurrent activations of one key give exactly one winner", async () => {
     const { key } = await buy();
     const macs = Array.from({ length: 12 }, (_, i) => i.toString(16).padStart(2, "0").toUpperCase().repeat(16));
-    const results = await Promise.all(macs.map((machine) => post("/api/activate", { key, machine })));
+    const results = await Promise.all(macs.map((machine) => post("/api/public/activate", { key, machine })));
     const statuses = results.map((r) => r.status).sort();
     expect(statuses.filter((s) => s === 200)).toHaveLength(1);
     expect(statuses.filter((s) => s === 409)).toHaveLength(11);
+  });
+
+  it("rate limits per IP with 429, without affecting other IPs", async () => {
+    const { key } = await buy();
+    const ip = { "CF-Connecting-IP": "203.0.113.77" };
+    const statuses: number[] = [];
+    for (let i = 0; i < 25; i++) statuses.push((await post("/api/public/activate", { key, machine: MAC_A }, ip)).status);
+    expect(statuses.slice(0, 20).every((s) => s === 200)).toBe(true);
+    expect(statuses.slice(20)).toEqual([429, 429, 429, 429, 429]);
+    const limited = await post("/api/public/deactivate", { key, machine: MAC_A }, ip);
+    expect(limited.status).toBe(429);
+    expect(limited.headers.get("Retry-After")).toBe("60");
+    expect((await post("/api/public/activate", { key, machine: MAC_A })).status).toBe(200);
   });
 });

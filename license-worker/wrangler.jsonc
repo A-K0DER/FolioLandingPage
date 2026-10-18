@@ -29,6 +29,8 @@
     },
     "production": {
       "name": "folio-license",
+      // Needs mac-folio.com to be a zone on this Cloudflare account. Pages keeps serving everything else.
+      "routes": [{ "pattern": "mac-folio.com/api/public/*", "zone_name": "mac-folio.com" }],
       "durable_objects": {
         "bindings": [{ "name": "LICENSE_STORE", "class_name": "LicenseStore" }]
       },

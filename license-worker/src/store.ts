@@ -38,6 +38,11 @@ export class LicenseStore extends DurableObject<Env> {
       CREATE TABLE IF NOT EXISTS handled (
         payment_id TEXT PRIMARY KEY
       );
+      CREATE TABLE IF NOT EXISTS rate_limits (
+        bucket TEXT PRIMARY KEY,
+        window_start INTEGER NOT NULL,
+        count INTEGER NOT NULL
+      );
     `);
   }
 
@@ -95,5 +100,24 @@ export class LicenseStore extends DurableObject<Env> {
       "DELETE FROM seats WHERE payment_id = ? AND machine = ?", paymentId, machine,
     );
     return { kind: res.rowsWritten > 0 ? "ok" : "not_activated" };
+  }
+
+  /** Fixed-window counter. Returns false once `limit` requests have been seen in the current minute. */
+  allow(bucket: string, limit: number, nowMs: number): boolean {
+    const sql = this.ctx.storage.sql;
+    const window = Math.floor(nowMs / 60_000) * 60_000;
+    // Drop stale buckets so the table doesn't grow without bound.
+    sql.exec("DELETE FROM rate_limits WHERE window_start < ?", window - 60_000);
+    const row = sql.exec<{ window_start: number; count: number }>(
+      "SELECT window_start, count FROM rate_limits WHERE bucket = ?", bucket,
+    ).toArray()[0];
+    const count = row && row.window_start === window ? row.count : 0;
+    if (count >= limit) return false;
+    sql.exec(
+      `INSERT INTO rate_limits (bucket, window_start, count) VALUES (?, ?, ?)
+       ON CONFLICT(bucket) DO UPDATE SET window_start = excluded.window_start, count = excluded.count`,
+      bucket, window, count + 1,
+    );
+    return true;
   }
 }

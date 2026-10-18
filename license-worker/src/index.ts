@@ -6,6 +6,7 @@ export { LicenseStore } from "./store";
 
 const MACHINE = /^[0-9A-Fa-f]{32}$/;
 const MAX_BODY = 2048;
+const DEFAULT_RATE_LIMIT = 20;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
@@ -73,9 +74,9 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const { pathname } = new URL(request.url);
     const route =
-      pathname === "/api/dodo-webhook" ? "webhook"
-      : pathname === "/api/activate" ? "activate"
-      : pathname === "/api/deactivate" ? "deactivate"
+      pathname === "/api/public/dodo-webhook" ? "webhook"
+      : pathname === "/api/public/activate" ? "activate"
+      : pathname === "/api/public/deactivate" ? "deactivate"
       : null;
     if (!route) return json({ error: "not_found" }, 404);
     if (request.method !== "POST") return json({ error: "method_not_allowed" }, 405);
@@ -84,6 +85,14 @@ export default {
       if (route === "webhook") return await handleWebhook(request, env);
       // The Mac app is not a browser and sends no Origin header. No CORS headers are ever returned.
       if (request.headers.has("Origin")) return json({ error: "forbidden" }, 403);
+      const limit = Number(env.RATE_LIMIT_PER_MIN) || DEFAULT_RATE_LIMIT;
+      const ip = request.headers.get("CF-Connecting-IP") ?? "unknown";
+      if (!(await env.LICENSE_STORE.getByName("global").allow(`ip:${ip}`, limit, Date.now()))) {
+        return new Response(JSON.stringify({ error: "rate_limited" }), {
+          status: 429,
+          headers: { "Content-Type": "application/json", "Retry-After": "60" },
+        });
+      }
       return await handleActivation(request, env, route === "activate");
     } catch (e) {
       console.error("unhandled error", route, e instanceof Error ? e.message : "error");

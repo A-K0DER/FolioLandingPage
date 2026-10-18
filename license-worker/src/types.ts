@@ -6,6 +6,8 @@ export interface Env {
   DODO_WEBHOOK_SECRET: string;
   RESEND_API_KEY: string;
   EMAIL_FROM: string;
+  /** Requests per minute per IP on the activation routes. Defaults to 20. */
+  RATE_LIMIT_PER_MIN?: string;
 }
 
 type AppEnv = Env;
