@@ -12,7 +12,7 @@ export const site = {
   releaseDate: '2026-10-01', // TODO
   price: { amount: 19.99, currency: 'USD', label: '$19.99' },
   // TODO: point these at your DMG and your checkout (Dodo Payments / Paddle / Lemon Squeezy)
-  downloadUrl: '#download-todo',
+  downloadUrl: '/downloads/Folio-1.0.0.dmg',
   checkoutUrl: 'https://checkout.dodopayments.com/buy/pdt_0Nq1fGt8Ixf2XOrna9nfR?quantity=1',
   supportEmail: 'ayushk199923@gmail.com', // TODO: switch to support@mac-folio.com once email routing is set up
   twitter: '', // TODO
