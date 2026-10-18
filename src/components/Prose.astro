@@ -1,0 +1,13 @@
+---
+interface Props { eyebrow: string; title: string; lead?: string; updated?: string }
+const { eyebrow, title, lead, updated } = Astro.props;
+---
+<section class="container-x max-w-3xl py-24">
+  <p class="eyebrow">{eyebrow}</p>
+  <h1 class="display mt-4 !text-5xl">{title}</h1>
+  {lead && <p class="lead mt-5">{lead}</p>}
+  {updated && <p class="mt-3 text-sm text-mute">Last updated: {updated}</p>}
+  <div class="mt-12 space-y-4 text-body leading-7 [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-tight [&_h2]:text-ink [&_a]:text-link [&_a]:underline [&_a]:underline-offset-4 [&_ul]:list-disc [&_ul]:space-y-1 [&_ul]:pl-6">
+    <slot />
+  </div>
+</section>

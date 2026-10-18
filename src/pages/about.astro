@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
+const jsonLd = { '@context': 'https://schema.org', '@type': 'AboutPage', name: `About ${site.name}`, url: `${site.url}/about/` };
+---
+<Layout title="About Us" description="Folio is a file manager for Mac, built around plain-English search and safe, undoable file operations." jsonLd={jsonLd}>
+  <Prose eyebrow="About" title="About Folio" lead="Folio is a file manager for Mac, made for people who spend their day moving, finding and organizing files.">
+    <h2>Why we built it</h2>
+    <p>Finder is fine until you work with a lot of files. Then you want tabs, a details pane, a clickable address bar, search that understands what you mean, and confidence that a mistake can be undone. Folio is our answer.</p>
+
+    <h2>What we care about</h2>
+    <ul>
+      <li><strong>Safety.</strong> Deleting sends files to the Trash, moves are verified, and every operation can be undone.</li>
+      <li><strong>Clarity.</strong> One familiar window, no clutter, and a clear one-time price of {site.price.label}.</li>
+      <li><strong>Privacy.</strong> Folio works on your Mac. Read our <a href="/privacy/">Privacy Policy</a>.</li>
+    </ul>
+
+    <h2>Try it</h2>
+    <p>Folio needs {site.minMacOS} or later and includes a {site.trialDays}-day free trial. <a href="/download/">Download Folio</a>, see the <a href="/features/">features</a>, or <a href="/contact/">get in touch</a>.</p>
+  </Prose>
+</Layout>

@@ -25,6 +25,8 @@ export const nav = [
   { href: '/compare/commander-one-alternative/', label: 'Compare' },
   { href: '/changelog/', label: 'Changelog' },
   { href: '/faq/', label: 'FAQ' },
+  { href: '/about/', label: 'About' },
+  { href: '/contact/', label: 'Contact' },
 ] as const;
 
 export const footer = [
@@ -45,10 +47,12 @@ export const footer = [
   { title: 'Resources', links: [
     { href: '/faq/', label: 'FAQ' },
     { href: '/support/', label: 'Support' },
+    { href: '/about/', label: 'About Us' },
+    { href: '/contact/', label: 'Contact Us' },
   ]},
   { title: 'Legal', links: [
-    { href: '/privacy/', label: 'Privacy' },
-    { href: '/terms/', label: 'Terms' },
+    { href: '/privacy/', label: 'Privacy Policy' },
+    { href: '/terms/', label: 'Terms & Conditions' },
   ]},
 ] as const;
 

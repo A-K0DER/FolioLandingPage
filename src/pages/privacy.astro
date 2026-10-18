@@ -1,9 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Prose from '../components/Prose.astro';
+import { site } from '../data/site';
 ---
-<Layout title="Privacy Policy" description="Privacy Policy for Folio." noindex>
-  <section class="container-x max-w-3xl py-24">
-    <h1 class="display !text-5xl">Privacy Policy</h1>
-    <p class="mt-6">TODO: replace with your real Privacy Policy before launch. This page is marked noindex until you do.</p>
-  </section>
+<Layout title="Privacy Policy" description="How Folio handles your data: what we collect on this website and through purchases, and what we don't.">
+  <Prose eyebrow="Legal" title="Privacy Policy" lead="Folio is a file manager that works on your own files. We aim to collect as little as possible." updated="October 18, 2026">
+    <h2>Your files</h2>
+    <p>Folio runs on your Mac and works with files stored on your Mac. We do not upload, read or store the contents or names of your files on our servers.</p>
+
+    <h2>What we collect</h2>
+    <ul>
+      <li><strong>Purchase information.</strong> When you buy a license, our payment processor handles your payment details and gives us your email address, name, country and license information so we can deliver and support your license. We never see your full card number.</li>
+      <li><strong>Support messages.</strong> If you email us, we keep your message and email address to respond and to improve the product.</li>
+      <li><strong>Website logs.</strong> Our hosting provider may keep standard server logs (such as IP address, browser and pages requested) for security and reliability.</li>
+    </ul>
+
+    <h2>How we use it</h2>
+    <p>We use this information to deliver your license, provide support, prevent fraud, meet legal obligations, and keep the website running. We do not sell your personal information.</p>
+
+    <h2>Sharing</h2>
+    <p>We share data only with service providers that help us operate (payment processing, hosting, email), and when required by law. They may only use it to provide their services to us.</p>
+
+    <h2>Retention</h2>
+    <p>We keep purchase records as long as needed for licensing, tax and accounting obligations, and support messages as long as needed to help you.</p>
+
+    <h2>Your rights</h2>
+    <p>Depending on where you live, you may have the right to access, correct, delete or export your personal data, or to object to certain processing. Email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> and we will respond.</p>
+
+    <h2>Children</h2>
+    <p>Folio is not directed at children under 13, and we do not knowingly collect their personal information.</p>
+
+    <h2>Changes</h2>
+    <p>If we change this policy, we will update the date above. Material changes will be noted on this page.</p>
+
+    <h2>Contact</h2>
+    <p>Questions? See our <a href="/contact/">contact page</a> or email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a>.</p>
+  </Prose>
 </Layout>
