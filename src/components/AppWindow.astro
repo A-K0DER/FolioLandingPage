@@ -1,0 +1,36 @@
+---
+// Decorative HTML illustration of the Folio window (replace with real screenshots when ready).
+const side = ['Desktop', 'Documents', 'Downloads', 'External Drive ⏏'];
+const rows = [['Receipts','folder','—'],['Design','folder','—'],['invoice-2026.pdf','file','212 KB'],['notes.md','file','4 KB'],['release.zip','zip','48 MB']];
+---
+<div class="overflow-hidden rounded-lg border border-hairline bg-elevated shadow-float" role="img" aria-label="Illustration of Folio's file manager window">
+  <div class="flex items-center gap-2 border-b border-hairline px-4 py-3">
+    <span class="size-3 rounded-full bg-[#ff5f57]"></span><span class="size-3 rounded-full bg-[#febc2e]"></span><span class="size-3 rounded-full bg-[#28c840]"></span>
+    <span class="mx-auto font-mono text-xs text-mute">Folio</span>
+  </div>
+  <div class="flex items-center gap-2 border-b border-hairline-soft bg-canvas px-4 py-2 font-mono text-xs text-body">
+    <span class="rounded-sm border border-hairline bg-elevated px-2 py-0.5 text-ink">Documents</span><span class="text-mute">+</span>
+    <span class="ml-auto min-w-0 truncate rounded-sm border border-hairline bg-elevated px-2 py-0.5 text-mute">pdfs bigger than 10 MB modified last week</span>
+  </div>
+  <div class="grid grid-cols-[8rem_1fr] sm:grid-cols-[9rem_1fr_11rem]">
+    <ul class="space-y-1 border-r border-hairline p-2 text-sm text-body">
+      {side.map((s) => <li class="truncate rounded-sm px-2 py-1.5">{s}</li>)}
+    </ul>
+    <ul class="min-w-0 p-2 text-sm">
+      {rows.map(([name, kind, size], j) => (
+        <li class:list={['flex items-center gap-3 rounded-sm px-2 py-1.5', j === 2 && 'bg-link-soft/50 text-ink']}>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" class="shrink-0 text-mute"><path d={kind === 'folder' ? 'M1.5 4a1 1 0 0 1 1-1H6l1.5 1.5h6a1 1 0 0 1 1 1V12a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1z' : 'M3.5 1.5h6l3 3v10h-9z'} fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+          <span class="min-w-0 flex-1 truncate">{name}</span>
+          <span class="font-mono text-xs tabular-nums text-mute">{size}</span>
+        </li>
+      ))}
+    </ul>
+    <div class="hidden border-l border-hairline p-3 text-xs text-body sm:block">
+      <p class="font-medium text-ink">invoice-2026.pdf</p>
+      <p class="mt-2">Size 212 KB</p><p>Modified last week</p>
+    </div>
+  </div>
+  <div class="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-hairline bg-canvas px-4 py-2 font-mono text-xs text-mute">
+    <span>5 items</span><span><span class="kbd">⌘</span><span class="kbd">P</span> Quick Open</span><span>Space Quick Look</span>
+  </div>
+</div>

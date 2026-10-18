@@ -1,0 +1,31 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname;
+---
+<header class="sticky top-0 z-40 border-b border-hairline bg-canvas/80 backdrop-blur-md">
+  <div class="container-x flex h-14 items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2 text-ink" aria-label="Folio home">
+      <svg width="24" height="24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><mask id="folio-mark-hdr"><path fill="#fff" d="M6 15a5 5 0 0 1 5-5h11.6a4 4 0 0 1 3.2 1.6L28 15h25a5 5 0 0 1 5 5v29a5 5 0 0 1-5 5H11a5 5 0 0 1-5-5Z"/><path d="M6 22.6H58" stroke="#000" stroke-width="1.6"/><path d="M25.5 30.5V45.5M25.5 30.5H38.5M25.5 38H35" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/></mask></defs><rect width="64" height="64" fill="currentColor" mask="url(#folio-mark-hdr)"/></svg>
+      <span class="text-base font-semibold tracking-tight" translate="no">{site.name}</span>
+    </a>
+    <nav aria-label="Primary" class="hidden items-center gap-1 md:flex">
+      {nav.map((n) => (
+        <a href={n.href} aria-current={path.startsWith(n.href) ? 'page' : undefined}
+           class="rounded-full px-3 py-2 text-sm text-body transition-colors hover:bg-hairline-soft hover:text-ink aria-[current=page]:text-ink">{n.label}</a>
+      ))}
+    </nav>
+    <div class="flex items-center gap-2">
+      <a href="/download/" class="btn-sm-ghost hidden sm:inline-flex">Download</a>
+      <a href="/pricing/" class="btn-sm">Buy {site.price.label}</a>
+      <details class="relative md:hidden">
+        <summary class="btn-sm-ghost cursor-pointer list-none px-2" aria-label="Menu">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4.5h12M2 11.5h12"/></svg>
+        </summary>
+        <div class="absolute right-0 top-10 w-56 rounded-md border border-hairline bg-elevated p-2 shadow-float">
+          {nav.map((n) => <a href={n.href} class="block rounded-sm px-3 py-2 text-sm text-ink hover:bg-hairline-soft">{n.label}</a>)}
+          <a href="/download/" class="block rounded-sm px-3 py-2 text-sm text-ink hover:bg-hairline-soft">Download</a>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>

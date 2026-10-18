@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import { featurePages } from '../../data/site';
+---
+<Layout title="Features" description="Plain-English search, safe file operations, tabs, Quick Open and archive support: everything Folio adds to your Mac.">
+  <section class="container-x py-24">
+    <p class="eyebrow">Features</p>
+    <h1 class="display mt-4 max-w-3xl !text-5xl sm:!text-6xl">Built for people who live in folders.</h1>
+    <p class="lead mt-5 max-w-2xl">Each feature is documented with specifics, so you know what you are buying.</p>
+    <div class="mt-12 grid gap-4 sm:grid-cols-2">
+      {featurePages.map((f) => (
+        <a href={`/features/${f.slug}/`} class="card p-8 transition-colors hover:bg-hairline-soft"><h2 class="text-2xl tracking-[-0.03em]">{f.title}</h2><p class="mt-2">{f.blurb}</p><p class="mt-6 text-sm font-medium text-ink">Read more →</p></a>
+      ))}
+    </div>
+  </section>
+  <CTA />
+</Layout>

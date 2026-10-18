@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import { site } from '../../data/site';
+
+// Commander One column: only what was observable on commander-one.com on 2026-10-18.
+const rows: [string, string, string][] = [
+  ['Price visible on the home page', `Yes, ${site.price.label}`, 'No, behind a separate Pricing page'],
+  ['Download choices', 'One direct download, no App Store', 'Mac App Store or direct, with differences on a separate page'],
+  ['Release notes', 'Public changelog', 'Version shown on the home page'],
+];
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'WebPage', name: 'Folio vs Commander One',
+  url: `${site.url}/compare/commander-one-alternative/`,
+};
+---
+<Layout title="Commander One Alternative for Mac" description="Looking for a Commander One alternative? Compare Folio and Commander One on pricing clarity and downloads." jsonLd={jsonLd}>
+  <section class="container-x max-w-4xl py-24">
+    <p class="eyebrow">Compare</p>
+    <h1 class="display mt-4 !text-5xl sm:!text-6xl">A Commander One alternative, with the price up&nbsp;front.</h1>
+    <p class="lead mt-5 max-w-2xl">Commander One is a well-known file manager. Here is how <span translate="no">{site.name}</span> differs.</p>
+
+    <div class="mt-12 overflow-x-auto rounded-md border border-hairline bg-elevated">
+      <table class="w-full min-w-xl text-left text-sm">
+        <caption class="sr-only">Folio compared with Commander One</caption>
+        <thead class="border-b border-hairline bg-canvas text-ink"><tr><th scope="col" class="px-5 py-3 font-medium">&nbsp;</th><th scope="col" class="px-5 py-3 font-medium" translate="no">Folio</th><th scope="col" class="px-5 py-3 font-medium" translate="no">Commander One</th></tr></thead>
+        <tbody class="divide-y divide-hairline">
+          {rows.map(([k, a, b]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{a}</td><td class="px-5 py-3">{b}</td></tr>)}
+        </tbody>
+      </table>
+    </div>
+    <p class="mt-3 text-xs text-mute">Commander One details reflect its public website as of October 18, 2026. Product names belong to their owners.</p>
+
+    <h2 class="h2 mt-16">Why people switch</h2>
+    <ul class="mt-6 grid gap-4 sm:grid-cols-3">
+      <li class="card"><h3 class="text-base">Clear pricing</h3><p class="mt-2 text-sm">One price, shown on every page.</p></li>
+      <li class="card"><h3 class="text-base">One download</h3><p class="mt-2 text-sm">No channel split to decode.</p></li>
+      <li class="card"><h3 class="text-base">Specific claims</h3><p class="mt-2 text-sm">Features described plainly, without superlatives.</p></li>
+    </ul>
+  </section>
+  <CTA />
+</Layout>

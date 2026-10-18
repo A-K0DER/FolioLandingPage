@@ -1,0 +1,23 @@
+---
+import { footer, site } from '../data/site';
+---
+<footer class="border-t border-hairline">
+  <div class="container-x grid gap-10 py-16 md:grid-cols-[1.4fr_repeat(4,1fr)]">
+    <div>
+      <p class="text-base font-semibold text-ink" translate="no">{site.name}</p>
+      <p class="mt-2 max-w-60 text-sm text-body">A file manager for&nbsp;Mac.</p>
+    </div>
+    {footer.map((g) => (
+      <nav aria-label={g.title}>
+        <h2 class="text-sm font-medium text-ink">{g.title}</h2>
+        <ul class="mt-3 space-y-2">
+          {g.links.map((l) => <li><a href={l.href} class="text-sm text-body transition-colors hover:text-ink">{l.label}</a></li>)}
+        </ul>
+      </nav>
+    ))}
+  </div>
+  <div class="container-x flex flex-wrap items-center justify-between gap-2 border-t border-hairline-soft py-6 text-xs text-mute">
+    <p>© {new Date().getFullYear()} <span translate="no">{site.name}</span>. Made for Mac.</p>
+    <p>Mac is a trademark of Apple Inc. Folio is not affiliated with Apple or Commander One.</p>
+  </div>
+</footer>

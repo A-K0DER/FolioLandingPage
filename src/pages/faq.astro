@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+const faqs = [
+  ['Is Folio a replacement for Finder?', 'Folio is a Finder alternative. You can keep using Finder whenever you like.'],
+  ['Is there a free trial?', `Yes, ${site.trialDays} days. After that a license is needed.`],
+  ['Which Macs are supported?', `${site.minMacOS} or later.`],
+  ['How many Macs can I use a license on?', 'One Mac per license. You can move it to another Mac by deactivating it first.'],
+  ['Is it on the App Store?', 'No. Folio is sold directly.'],
+  ['Does Folio collect my data?', 'No analytics or tracking, and your files never leave your Mac. The internet is used only when you click Activate or Deactivate.'],
+  ['Will browsing download my iCloud files?', 'No. Files that are not downloaded from iCloud are never downloaded by browsing.'],
+  ['Can I undo a file operation?', 'Yes, every operation can be undone. Delete goes to the Trash.'],
+];
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<Layout title="FAQ" description="Answers about Folio: pricing, trial, compatibility and privacy." jsonLd={jsonLd}>
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">FAQ</p><h1 class="display mt-4 !text-5xl">Questions, answered.</h1>
+    <div class="mt-12 divide-y divide-hairline border-y border-hairline">
+      {faqs.map(([q, a]) => (
+        <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-ink">{q}<span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary><p class="mt-3 text-sm leading-6">{a}</p></details>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Support" description="Get help with Folio. Email support, license recovery and bug reports.">
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">Support</p><h1 class="display mt-4 !text-5xl">We're here to help.</h1>
+    <p class="lead mt-5">Email <a class="text-link underline underline-offset-4" href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> with your macOS version and what happened. Please include your purchase email for license questions.</p>
+  </section>
+</Layout>

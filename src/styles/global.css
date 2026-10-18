@@ -1,0 +1,79 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* Tokens from DESIGN.md (Geist / Vercel system). `@theme` creates utilities. */
+@theme {
+  --font-sans: "Geist Variable", Arial, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink: #171717;
+  --color-body: #4d4d4d;
+  --color-mute: #6b6b6b; /* darkened from #8f8f8f to pass 4.5:1 on #fafafa */
+  --color-faint: #a1a1a1;
+  --color-hairline: #ebebeb;
+  --color-hairline-soft: #f2f2f2;
+  --color-canvas: #fafafa;
+  --color-elevated: #ffffff;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-link-soft: #d3e5ff;
+  --color-error: #ee0000;
+  --color-violet: #7928ca;
+  --color-cyan: #50e3c2;
+  --color-pink: #ff0080;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 100px;
+
+  --shadow-whisper: 0 1px 1px rgb(0 0 0 / 0.04);
+  --shadow-float: 0 2px 2px rgb(0 0 0 / 0.04), 0 8px 16px -4px rgb(0 0 0 / 0.08);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5rem; /* sticky header offset for anchors */
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-canvas font-sans text-body antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1, h2, h3, h4 { @apply font-semibold text-ink; text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+  a, button, summary { touch-action: manipulation; }
+  :focus-visible { @apply outline-2 outline-offset-2 outline-link; }
+  ::selection { background: var(--color-link-soft); }
+}
+
+@utility container-x { @apply mx-auto w-full max-w-300 px-6; }
+@utility eyebrow { @apply font-mono text-xs font-medium uppercase tracking-wider text-mute; }
+@utility display { @apply text-[2.5rem] leading-[1.02] tracking-[-0.05em] sm:text-6xl md:text-7xl; }
+@utility h2 { @apply text-3xl leading-10 tracking-[-0.04em] sm:text-4xl; }
+@utility lead { @apply text-lg leading-7 text-body sm:text-xl sm:leading-8; }
+@utility btn { @apply inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors duration-150; }
+@utility btn-pill { @apply btn h-11 rounded-pill px-5 text-base; }
+@utility btn-primary { @apply btn-pill bg-ink text-white hover:bg-[#383838] active:bg-black; }
+@utility btn-secondary { @apply btn-pill border border-hairline bg-elevated text-ink hover:bg-hairline-soft; }
+@utility btn-sm { @apply btn h-8 rounded-sm bg-ink px-3 text-white hover:bg-[#383838]; }
+@utility btn-sm-ghost { @apply btn h-8 rounded-sm border border-hairline bg-elevated px-3 text-ink hover:bg-hairline-soft; }
+@utility card { @apply rounded-md border border-hairline bg-elevated p-6; }
+@utility kbd { @apply inline-flex min-w-6 items-center justify-center rounded-sm border border-hairline bg-elevated px-1.5 py-0.5 font-mono text-xs text-ink shadow-whisper; }
+
+/* The only decorative system: the hero mesh gradient. */
+.mesh {
+  background:
+    radial-gradient(40% 50% at 20% 30%, rgb(0 124 240 / 0.28), transparent 70%),
+    radial-gradient(35% 45% at 45% 20%, rgb(80 227 194 / 0.30), transparent 70%),
+    radial-gradient(40% 50% at 70% 30%, rgb(121 40 202 / 0.24), transparent 70%),
+    radial-gradient(35% 45% at 88% 25%, rgb(255 0 128 / 0.22), transparent 70%),
+    radial-gradient(35% 40% at 60% 55%, rgb(249 203 40 / 0.26), transparent 70%);
+  filter: blur(40px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+}

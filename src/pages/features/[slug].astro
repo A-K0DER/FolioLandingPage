@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import AppWindow from '../../components/AppWindow.astro';
+import { featurePages } from '../../data/site';
+
+const copy: Record<string, { h1: string; desc: string; intro: string; points: [string, string][] }> = {
+  'finder-alternative': {
+    h1: 'A Finder alternative with an Explorer-style layout.',
+    desc: 'Folio is a Mac file manager with tabs, a clickable address bar, a sidebar with drives and eject, a status bar and a details pane.',
+    intro: 'Everything you need to move around your Mac sits in one window.',
+    points: [['Tabs that come back', 'Tabs reopen at launch, and sort and columns are remembered per folder.'], ['Details pane', 'Preview, size, dates, permissions, tags, and where aliases point.'], ['Quick Open', 'Press ⌘P and jump to any folder by typing a few letters.']],
+  },
+  search: {
+    h1: 'Search the way you would say it.',
+    desc: 'Type a plain-English query like "pdfs bigger than 10 MB modified last week" and search a folder or This Mac in Folio for Mac.',
+    intro: 'Describe what you want. Folio turns it into filters you can see and remove.',
+    points: [['Plain English', '"pdfs bigger than 10 MB modified last week" works as written.'], ['Folder or This Mac', 'Search the current folder or your whole Mac.'], ['Removable filter chips', 'Each part of your query becomes a chip. Remove one to widen the search. Search matches file names only.']],
+  },
+  'safe-file-operations': {
+    h1: 'File operations that will not lose your files.',
+    desc: 'Folio sends deleted files to the Trash, never overwrites silently, verifies moves between drives, and lets you undo every operation.',
+    intro: 'Moving files should never be a gamble.',
+    points: [['Trash and undo', 'Delete goes to the Trash, and every operation can be undone.'], ['Verified moves', 'A move to another drive is verified before the original is trashed. Nothing is overwritten silently.'], ['Operations queue', 'Progress, Cancel, and removable waiting jobs. Every failure explains itself.']],
+  },
+  archives: {
+    h1: 'Look inside archives before you extract.',
+    desc: 'Extract ZIP, TAR and 7Z archives and look inside them first with Folio for Mac. Compress to ZIP from the right-click menu.',
+    intro: 'See what is in an archive before it lands in your folder.',
+    points: [['ZIP, TAR and 7Z', 'Extract the formats you meet most.'], ['Look inside first', 'Browse an archive before extracting it.'], ['Compress to ZIP', 'Available from the right-click menu.']],
+  },
+};
+export function getStaticPaths() {
+  return featurePages.map((f) => ({ params: { slug: f.slug }, props: { f } }));
+}
+const { f } = Astro.props;
+const c = copy[f.slug];
+---
+<Layout title={f.title} description={c.desc}>
+  <section class="container-x py-24">
+    <nav aria-label="Breadcrumb" class="text-sm text-mute"><a href="/features/" class="hover:text-ink">Features</a> / <span class="text-ink">{f.title}</span></nav>
+    <h1 class="display mt-6 max-w-3xl !text-5xl sm:!text-6xl">{c.h1}</h1>
+    <p class="lead mt-5 max-w-2xl">{c.intro}</p>
+    <div class="mt-10 flex gap-3"><a href="/download/" class="btn-primary">Download for Mac</a><a href="/pricing/" class="btn-secondary">Pricing</a></div>
+    <div class="mt-16 max-w-4xl"><AppWindow /></div>
+    <div class="mt-16 grid gap-4 md:grid-cols-3">
+      {c.points.map(([t, d]) => <article class="card"><h2 class="text-lg tracking-[-0.02em]">{t}</h2><p class="mt-2 text-sm">{d}</p></article>)}
+    </div>
+  </section>
+  <CTA />
+</Layout>

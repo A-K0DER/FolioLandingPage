@@ -1,11 +1,79 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import AppWindow from '../components/AppWindow.astro';
+import CTA from '../components/CTA.astro';
+import { site, featurePages } from '../data/site';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pillars = [
+  { t: 'Search in plain English', d: '"pdfs bigger than 10 MB modified last week", on a folder or This Mac, with removable filter chips. Searches file names only.' },
+  { t: 'Your files stay safe', d: 'Delete goes to the Trash, nothing is overwritten silently, and every operation can be undone.' },
+  { t: 'Quick Open', d: 'Press ⌘P and jump to any folder by typing a few letters.' },
+  { t: 'Archives', d: 'Extract ZIP, TAR and 7Z, and look inside them before extracting.' },
+  { t: 'Explorer-style layout', d: 'Tabs, a clickable address bar, a sidebar with drives and eject, a status bar and a details pane.' },
+  { t: 'List to large icons', d: 'One slider covers every view. Sort and columns are remembered per folder, and tabs reopen at launch.' },
+];
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: site.name,
+  applicationCategory: 'UtilitiesApplication', operatingSystem: site.minMacOS + ' or later',
+  description: site.description, softwareVersion: site.version, url: site.url,
+  offers: { '@type': 'Offer', price: site.price.amount, priceCurrency: site.price.currency },
+};
 ---
+<Layout title="Folio: The Finder Alternative for Mac" jsonLd={jsonLd}>
+  <section class="relative overflow-hidden">
+    <div class="mesh pointer-events-none absolute inset-x-0 -top-10 h-130" aria-hidden="true"></div>
+    <div class="container-x relative pb-16 pt-20 text-center sm:pt-28">
+      <p class="eyebrow rise">Finder alternative for macOS</p>
+      <h1 class="display rise mx-auto mt-5 max-w-4xl" style="animation-delay:60ms">The file manager Finder should have&nbsp;been.</h1>
+      <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a file manager for Mac with plain-English search, safe file operations, tabs and Quick Open. {site.trialDays}-day free trial.</p>
+      <div class="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="animation-delay:180ms">
+        <a href="/download/" class="btn-primary w-full sm:w-auto">Download for Mac</a>
+        <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
+      </div>
+      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license{site.trialDays ? ` · ${site.trialDays}-day free trial` : ''}</p>
+    </div>
+    <div class="container-x relative max-w-5xl pb-24"><AppWindow /></div>
+  </section>
 
-<Layout>
-	<Welcome />
+  <section class="border-t border-hairline">
+    <div class="container-x py-24">
+      <p class="eyebrow">Why Folio</p>
+      <h2 class="h2 mt-3 max-w-2xl">Built around your files' safety.</h2>
+      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {pillars.map((p) => (
+          <article class="card"><h3 class="text-xl leading-7 tracking-[-0.02em]">{p.t}</h3><p class="mt-2 text-sm leading-6">{p.d}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-hairline">
+    <div class="container-x grid gap-10 py-24 lg:grid-cols-2 lg:items-center">
+      <div>
+        <p class="eyebrow">Pricing, upfront</p>
+        <h2 class="h2 mt-3">One license. Sold directly.</h2>
+        <p class="lead mt-4">Try <span translate="no">{site.name}</span> free for {site.trialDays} days, then buy a license. No App Store, no analytics, no tracking.</p>
+        <div class="mt-6 flex gap-3"><a href="/pricing/" class="btn-sm">See Pricing</a><a href="/compare/commander-one-alternative/" class="btn-sm-ghost">Folio vs Commander One</a></div>
+      </div>
+      <div class="card p-8">
+        <p class="eyebrow">License</p>
+        <p class="mt-3 text-6xl font-semibold tracking-[-0.05em] text-ink">{site.price.label}</p>
+        <ul class="mt-6 space-y-2 text-sm">
+          <li>✓ One Mac per license, movable by deactivating</li><li>✓ Sold directly, no App Store</li><li>✓ No analytics or tracking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-t border-hairline">
+    <div class="container-x py-24">
+      <p class="eyebrow">Explore</p>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {featurePages.map((f) => (
+          <a href={`/features/${f.slug}/`} class="card transition-colors hover:bg-hairline-soft"><h3 class="text-base">{f.title}</h3><p class="mt-1 text-sm">{f.blurb}</p></a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CTA />
 </Layout>
