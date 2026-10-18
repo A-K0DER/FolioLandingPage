@@ -13,7 +13,7 @@ export const site = {
   price: { amount: 19.99, currency: 'USD', label: '$19.99' },
   // TODO: point these at your DMG and your checkout (Dodo Payments / Paddle / Lemon Squeezy)
   downloadUrl: '#download-todo',
-  checkoutUrl: 'https://test.checkout.dodopayments.com/buy/pdt_0Nq1EUkyJ4XjGzf8ordZ1?quantity=1', // TODO: swap for the live link at launch
+  checkoutUrl: 'https://checkout.dodopayments.com/buy/pdt_0Nq1fGt8Ixf2XOrna9nfR?quantity=1',
   supportEmail: 'support@mac-folio.com', // TODO
   twitter: '', // TODO
 } as const;
