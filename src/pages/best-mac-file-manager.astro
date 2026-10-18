@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+import { site } from '../data/site';
+
+const criteria: [string, string][] = [
+  ['Search that finds things fast', `Folio lets you type "pdfs bigger than 10 MB modified last week" and turns it into filters you can see and remove.`],
+  ['Safe file operations', 'Look for Trash on delete, no silent overwrites and undo. Folio offers all three.'],
+  ['Tabs and navigation', 'A good file manager for Mac has tabs that persist, a clickable address bar and a fast way to jump to folders, like Folio’s ⌘P Quick Open.'],
+  ['Archive support', 'Browse and extract ZIP, TAR and 7Z without leaving the app.'],
+  ['Clear pricing and privacy', `Know what it costs and what it collects. Folio is ${site.price.label} after a ${site.trialDays}-day trial, with no analytics or tracking.`],
+];
+const others = [
+  ['Commander One', '/compare/commander-one-alternative/'],
+  ['ForkLift', '/compare/forklift-alternative/'],
+  ['Path Finder', '/compare/path-finder-alternative/'],
+  ['Marta', '/compare/marta-alternative/'],
+] as const;
+const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: 'How to choose the best Mac file manager', url: `${site.url}/best-mac-file-manager/` };
+---
+<Layout title="Best Mac File Manager: What to Look For" description="How to choose the best Mac file manager app and Finder alternative: search, safe file operations, tabs, archives and pricing. See where Folio fits." jsonLd={jsonLd}>
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">Guide</p>
+    <h1 class="display mt-4 !text-5xl sm:!text-6xl">How to choose the best Mac file manager.</h1>
+    <p class="lead mt-5">There is no single best file manager for Mac. The right one depends on how you work. Here are the five things worth checking when you compare Mac file manager apps and Finder alternatives.</p>
+
+    <ol class="mt-12 space-y-4">
+      {criteria.map(([t, d], i) => <li class="card"><h2 class="text-lg tracking-[-0.02em]">{i + 1}. {t}</h2><p class="mt-2 text-sm leading-6">{d}</p></li>)}
+    </ol>
+
+    <h2 class="h2 mt-16">Compare popular Mac Finder alternatives</h2>
+    <p class="mt-4 text-base leading-7">We have written short comparisons with other well-known Mac file managers. Each one explains where <span translate="no">{site.name}</span> differs.</p>
+    <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+      {others.map(([n, h]) => <li><a href={h} class="card block transition-colors hover:bg-hairline-soft"><span class="text-base font-medium text-ink">Folio vs {n}</span></a></li>)}
+    </ul>
+    <p class="mt-8 text-base leading-7">Want to see it for yourself? <a href="/download/" class="text-link underline underline-offset-4">Try Folio free for {site.trialDays} days</a>.</p>
+  </section>
+  <CTA />
+</Layout>
