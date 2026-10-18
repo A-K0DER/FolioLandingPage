@@ -14,7 +14,7 @@ export const site = {
   // TODO: point these at your DMG and your checkout (Dodo Payments / Paddle / Lemon Squeezy)
   downloadUrl: '#download-todo',
   checkoutUrl: 'https://checkout.dodopayments.com/buy/pdt_0Nq1fGt8Ixf2XOrna9nfR?quantity=1',
-  supportEmail: 'support@mac-folio.com', // TODO
+  supportEmail: 'ayushk199923@gmail.com', // TODO: switch to support@mac-folio.com once email routing is set up
   twitter: '', // TODO
 } as const;
 
