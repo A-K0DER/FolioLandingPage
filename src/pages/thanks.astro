@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+<Layout title="Thank You" description={`Thanks for buying ${site.name}. Your license key is on its way.`} noindex>
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">Payment received</p>
+    <h1 class="display mt-4 !text-5xl sm:!text-6xl">Thank you for buying <span translate="no">{site.name}</span>.</h1>
+    <p class="lead mt-5">Your license key is in the receipt email from Dodo Payments, usually within a minute or two.</p>
+    <ol class="mt-10 space-y-4 text-ink">
+      <li><span class="text-mute">1.</span> Check your inbox (and spam) for the receipt email and copy your license key.</li>
+      <li><span class="text-mute">2.</span> Download and open {site.name}, then choose <strong>Enter License</strong> and paste the key.</li>
+      <li><span class="text-mute">3.</span> One license covers one Mac. To move it, deactivate on the old Mac first.</li>
+    </ol>
+    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+      <a href={site.downloadUrl} class="btn-primary">Download .dmg</a>
+      <a href="/support/" class="btn-secondary">Didn't get the email?</a>
+    </div>
+    <p class="mt-8 text-sm text-mute">You can also find your key any time in the customer portal link in the receipt, or email <a href={`mailto:${site.supportEmail}`} class="underline">{site.supportEmail}</a>.</p>
+  </section>
+</Layout>

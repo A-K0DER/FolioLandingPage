@@ -8,6 +8,6 @@ export default defineConfig({
   site: 'https://mac-folio.com',
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.includes('/thanks/') })],
   vite: { plugins: [tailwindcss()] },
 });
