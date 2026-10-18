@@ -2,26 +2,26 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
-/* Tokens from DESIGN.md (Geist / Vercel system). `@theme` creates utilities. */
+/* Tokens from the Folio brand kit (light values). `@theme` creates utilities. */
 @theme {
   --font-sans: "Geist Variable", Arial, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-ink: #171717;
-  --color-body: #4d4d4d;
-  --color-mute: #6b6b6b; /* darkened from #8f8f8f to pass 4.5:1 on #fafafa */
-  --color-faint: #a1a1a1;
-  --color-hairline: #ebebeb;
-  --color-hairline-soft: #f2f2f2;
-  --color-canvas: #fafafa;
+  --color-ink: #1C1F22;
+  --color-body: #43474C;
+  --color-mute: #5F6368; /* brand ink-muted */
+  --color-faint: #868E98;
+  --color-hairline: #E3DED4;
+  --color-hairline-soft: #F5EFE3;
+  --color-canvas: #FAF8F3;
   --color-elevated: #ffffff;
-  --color-link: #0070f3;
-  --color-link-deep: #0761d1;
-  --color-link-soft: #d3e5ff;
-  --color-error: #ee0000;
-  --color-violet: #7928ca;
-  --color-cyan: #50e3c2;
-  --color-pink: #ff0080;
+  --color-link: #0F766E; /* brand teal */
+  --color-link-deep: #0B5F58;
+  --color-link-soft: #CFE8E4;
+  --color-error: #B42318;
+  --color-paper-deep: #E2D6BF;
+  --color-graphite: #262A30;
+  --color-on-brand: #F5EFE3;
 
   --radius-sm: 6px;
   --radius-md: 12px;
@@ -29,7 +29,7 @@
   --radius-pill: 100px;
 
   --shadow-whisper: 0 1px 1px rgb(0 0 0 / 0.04);
-  --shadow-float: 0 2px 2px rgb(0 0 0 / 0.04), 0 8px 16px -4px rgb(0 0 0 / 0.08);
+  --shadow-float: 0 2px 2px rgb(28 31 34 / 0.05), 0 8px 16px -4px rgb(28 31 34 / 0.10);
 }
 
 @layer base {
@@ -55,21 +55,20 @@
 @utility lead { @apply text-lg leading-7 text-body sm:text-xl sm:leading-8; }
 @utility btn { @apply inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-colors duration-150; }
 @utility btn-pill { @apply btn h-11 rounded-pill px-5 text-base; }
-@utility btn-primary { @apply btn-pill bg-ink text-white hover:bg-[#383838] active:bg-black; }
+@utility btn-primary { @apply btn-pill bg-link text-on-brand hover:bg-link-deep active:bg-link-deep; }
 @utility btn-secondary { @apply btn-pill border border-hairline bg-elevated text-ink hover:bg-hairline-soft; }
-@utility btn-sm { @apply btn h-8 rounded-sm bg-ink px-3 text-white hover:bg-[#383838]; }
+@utility btn-sm { @apply btn h-8 rounded-sm bg-link px-3 text-on-brand hover:bg-link-deep; }
 @utility btn-sm-ghost { @apply btn h-8 rounded-sm border border-hairline bg-elevated px-3 text-ink hover:bg-hairline-soft; }
 @utility card { @apply rounded-md border border-hairline bg-elevated p-6; }
 @utility kbd { @apply inline-flex min-w-6 items-center justify-center rounded-sm border border-hairline bg-elevated px-1.5 py-0.5 font-mono text-xs text-ink shadow-whisper; }
 
-/* The only decorative system: the hero mesh gradient. */
+/* The only decorative system: the hero gradient (teal and paper). */
 .mesh {
   background:
-    radial-gradient(40% 50% at 20% 30%, rgb(0 124 240 / 0.28), transparent 70%),
-    radial-gradient(35% 45% at 45% 20%, rgb(80 227 194 / 0.30), transparent 70%),
-    radial-gradient(40% 50% at 70% 30%, rgb(121 40 202 / 0.24), transparent 70%),
-    radial-gradient(35% 45% at 88% 25%, rgb(255 0 128 / 0.22), transparent 70%),
-    radial-gradient(35% 40% at 60% 55%, rgb(249 203 40 / 0.26), transparent 70%);
+    radial-gradient(40% 50% at 25% 30%, rgb(15 118 110 / 0.22), transparent 70%),
+    radial-gradient(40% 50% at 55% 20%, rgb(226 214 191 / 0.80), transparent 70%),
+    radial-gradient(35% 45% at 80% 30%, rgb(45 212 191 / 0.18), transparent 70%),
+    radial-gradient(35% 40% at 50% 60%, rgb(38 42 48 / 0.07), transparent 70%);
   filter: blur(40px);
 }
 
