@@ -11,9 +11,22 @@ const faqs = [
   ['Will browsing download my iCloud files?', 'No. Files that are not downloaded from iCloud are never downloaded by browsing.'],
   ['Can I undo a file operation?', 'Yes, every operation can be undone. Delete goes to the Trash.'],
 ];
-const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+const basics = [
+  ['How to open file manager on Mac', 'Click the Finder icon, the blue smiling face at the left end of the Dock. You can also press ⌘N while in Finder to open a new window, or click the desktop and choose File > New Finder Window.'],
+  ['How to open file manager in Mac with the keyboard', 'Press ⌘Space to open Spotlight, type "Finder" and press Return. To open a Finder window quickly from any app, switch to Finder by clicking its Dock icon and press ⌘N.'],
+  ['Where is file manager on Mac', 'The Mac file manager is Finder. Its icon is the first icon in the Dock. It is built into macOS, so there is nothing to install.'],
+  ['Where is file manager in Mac if the Dock icon is missing', 'Open Spotlight with ⌘Space and search for Finder, or click the desktop and use File > New Finder Window. Finder is always running on a Mac and cannot be uninstalled.'],
+  ['What is the file manager in Mac OS called', 'It is called Finder. Finder has been the Mac file manager since the original Macintosh in 1984, and it is the Mac equivalent of File Explorer on Windows.'],
+  ['What is the Mac equivalent of Windows File Explorer', 'Finder. If you want an Explorer-style layout on Mac, with tabs, an address bar and a details pane, a Finder alternative such as Folio provides it.'],
+  ['How do I show the path bar in Finder', 'Open Finder and choose View > Show Path Bar. It shows the full folder path at the bottom of the window.'],
+  ['How do I show hidden files on Mac', 'In Finder, press ⌘⇧. (Command, Shift, period) to show or hide hidden files.'],
+  ['How do I go to a specific folder in Finder', 'Press ⌘⇧G, type the folder path and press Return. In Folio, press ⌘P for Quick Open and type a few letters of the folder name.'],
+  ['Is there a better file manager for Mac than Finder', 'It depends on how you work. Many people add a Mac file manager app for tabs, faster search or safer file operations. See our guide to the best Mac file manager.'],
+];
+const all = [...faqs, ...basics];
+const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Layout title="FAQ" description="Answers about Folio: pricing, trial, compatibility and privacy." jsonLd={jsonLd}>
+<Layout title="FAQ" description="Answers about Folio and Mac file managers: how to open the file manager on Mac, where Finder is, what it is called, pricing, trial and privacy." jsonLd={jsonLd}>
   <section class="container-x max-w-3xl py-24">
     <p class="eyebrow">FAQ</p><h1 class="display mt-4 !text-5xl">Questions, answered.</h1>
     <div class="mt-12 divide-y divide-hairline border-y border-hairline">
@@ -21,5 +34,14 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntit
         <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-ink">{q}<span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary><p class="mt-3 text-sm leading-6">{a}</p></details>
       ))}
     </div>
+
+    <h2 class="h2 mt-20">Mac file manager basics</h2>
+    <p class="lead mt-3">Quick answers about Finder, the file manager built into every Mac.</p>
+    <div class="mt-8 divide-y divide-hairline border-y border-hairline">
+      {basics.map(([q, a]) => (
+        <details class="group py-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-medium text-ink">{q}<span class="text-mute transition-transform group-open:rotate-45" aria-hidden="true">+</span></summary><p class="mt-3 text-sm leading-6">{a}</p></details>
+      ))}
+    </div>
+    <p class="mt-8 text-sm leading-6">Want more than Finder offers? Read about the <a href="/best-mac-file-manager/" class="text-link underline underline-offset-4">best Mac file manager</a> or try <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Folio as a Finder alternative</a>.</p>
   </section>
 </Layout>
