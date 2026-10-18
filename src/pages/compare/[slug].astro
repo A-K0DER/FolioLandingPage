@@ -15,16 +15,16 @@ const folio: [string, string][] = [
   ['Folder tools', 'Quick Open (⌘P) and per-folder sort and columns'],
   ['Other', 'Operations queue with progress and cancel'],
   ['Archives', 'Look inside and extract ZIP, TAR and 7Z; compress to ZIP'],
-  ['Price', `${site.price.label}, one Mac per license, ${site.trialDays}-day free trial`],
-  ['Price and trial', `${site.price.label}, one Mac per license, ${site.trialDays}-day free trial`],
-  ['Price and status', `${site.price.label} after a ${site.trialDays}-day free trial; released as version ${site.version}`],
+  ['Price', `${site.price.label}, one-time, one Mac per license`],
+  ['Price', `${site.price.label}, one-time, one Mac per license`],
+  ['Price and status', `${site.price.label} one-time; released as version ${site.version}`],
   ['Minimum macOS', site.minMacOS],
   ['Privacy', 'No analytics or tracking; the internet is used only to activate or deactivate'],
 ];
 const folioFor: Record<string, string> = Object.fromEntries(folio);
 const faqs = [
-  [`Is Folio a ${r.name} alternative?`, `Folio is a Mac Finder alternative that some people use instead of ${r.name}. Try it free for ${site.trialDays} days to see whether it fits how you work.`],
-  [`Is Folio free like some ${r.name} alternatives?`, `No. Folio has a ${site.trialDays}-day free trial, then a one-time ${site.price.label} license.`],
+  [`Is Folio a ${r.name} alternative?`, `Folio is a Mac Finder alternative that some people use instead of ${r.name}. See whether it fits how you work.`],
+  [`Is Folio free like some ${r.name} alternatives?`, `No. Folio is a one-time ${site.price.label} license.`],
   ['Can I use Folio with Finder?', 'Yes. Folio works alongside Finder, so you can switch back at any time.'],
 ];
 const jsonLd = [

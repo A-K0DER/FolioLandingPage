@@ -6,12 +6,11 @@ export const site = {
   url: 'https://mac-folio.com',
   tagline: 'The file manager Finder should have been.',
   description:
-    'Folio is a Mac Finder alternative: a file manager for macOS with plain-English search, safe file operations, tabs, Quick Open and archive support. 7-day free trial.',
+    'Folio is a Mac Finder alternative: a file manager for macOS with plain-English search, safe file operations, tabs, Quick Open and archive support.',
   version: '1.0.0', // TODO
   minMacOS: 'macOS 14', 
   releaseDate: '2026-10-01', // TODO
-  price: { amount: 19, currency: 'USD', label: '$19' }, // TODO
-  trialDays: 7,
+  price: { amount: 19.99, currency: 'USD', label: '$19.99' },
   // TODO: point these at your DMG and your checkout (Dodo Payments / Paddle / Lemon Squeezy)
   downloadUrl: '#download-todo',
   checkoutUrl: 'https://test.checkout.dodopayments.com/buy/pdt_0Nq1EUkyJ4XjGzf8ordZ1?quantity=1', // TODO: swap for the live link at launch
@@ -95,7 +94,7 @@ export const rivals = [
       ['Folder tools', 'Compare, merge and synchronize folders; batch rename and batch select'],
       ['Drag and drop', 'Drop Stack for pausing a drag-and-drop operation'],
       ['Other', 'Shows hidden files, full keyboard navigation, saved searches'],
-      ['Price and trial', 'Past versions offered a 30-day demo; confirm current pricing on its website'],
+      ['Price', 'Past versions offered a 30-day demo; confirm current pricing on its website'],
     ],
     pick: 'Choose Path Finder if you want a long-established, feature-rich Finder replacement with dual panes and folder-compare tools. Choose Folio if you want a smaller, calmer app built around search, safe operations and a clear price.',
   },

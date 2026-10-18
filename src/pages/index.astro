@@ -19,25 +19,25 @@ const jsonLd = {
   offers: { '@type': 'Offer', price: site.price.amount, priceCurrency: site.price.currency },
 };
 const faqs = [
-  ['What is the best Mac Finder alternative?', 'It depends on what you need. Folio is a Mac Finder alternative for people who want tabs, plain-English search, Quick Open and undoable file operations in one app. Try it free for 7 days and compare it with Finder and other Mac file managers.'],
-  ['Is there a free Mac Finder alternative?', 'Folio has a free 7-day trial, then a one-time paid license. It is not a free or open-source app.'],
+  ['What is the best Mac Finder alternative?', 'It depends on what you need. Folio is a Mac Finder alternative for people who want tabs, plain-English search, Quick Open and undoable file operations in one app. Compare it with Finder and other Mac file managers.'],
+  ['Is there a free Mac Finder alternative?', 'No. Folio is a one-time paid license. It is not a free or open-source app.'],
   ['How is Folio different from Commander One, ForkLift, Path Finder or Marta?', 'Those are established Mac file managers with their own strengths. Folio focuses on plain-English search, safe file operations and a familiar Explorer-style layout, with the price shown up front. See our Commander One comparison for details.'],
   ['Can I still use Finder?', 'Yes. Folio sits alongside Finder, so you can use either whenever you like.'],
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Layout title="Mac Finder Alternative: Folio File Manager for Mac" description="Folio is a Mac Finder alternative and file manager app for macOS: plain-English search, tabs, Quick Open, safe file operations and undo. Try it free for 7 days." jsonLd={[jsonLd, faqLd]}>
+<Layout title="Mac Finder Alternative: Folio File Manager for Mac" description="Folio is a Mac Finder alternative and file manager app for macOS: plain-English search, tabs, Quick Open, safe file operations and undo." jsonLd={[jsonLd, faqLd]}>
   <section class="relative overflow-hidden">
     <div class="mesh pointer-events-none absolute inset-x-0 -top-10 h-130" aria-hidden="true"></div>
     <div class="container-x relative pb-16 pt-20 text-center sm:pt-28">
       <p class="eyebrow rise">Finder alternative for macOS</p>
       <h1 class="display rise mx-auto mt-5 max-w-4xl" style="animation-delay:60ms">The Mac Finder alternative built for your&nbsp;files.</h1>
-      <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a file manager for Mac, and a Finder alternative, with plain-English search, safe file operations, tabs and Quick Open. {site.trialDays}-day free trial.</p>
+      <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a file manager for Mac, and a Finder alternative, with plain-English search, safe file operations, tabs and Quick Open.</p>
       <div class="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="animation-delay:180ms">
         <a href="/download/" class="btn-primary w-full sm:w-auto">Download for Mac</a>
         <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
       </div>
-      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license{site.trialDays ? ` · ${site.trialDays}-day free trial` : ''}</p>
+      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license</p>
     </div>
     <div class="container-x relative max-w-5xl pb-24"><AppWindow /></div>
   </section>
@@ -59,7 +59,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       <div>
         <p class="eyebrow">Pricing, upfront</p>
         <h2 class="h2 mt-3">One license. Sold directly.</h2>
-        <p class="lead mt-4">Try <span translate="no">{site.name}</span> free for {site.trialDays} days, then buy a license. No App Store, no analytics, no tracking.</p>
+        <p class="lead mt-4">One-time purchase of <span translate="no">{site.name}</span>, one Mac per license. No App Store, no analytics, no tracking.</p>
         <div class="mt-6 flex gap-3"><a href="/pricing/" class="btn-sm">See Pricing</a><a href="/compare/commander-one-alternative/" class="btn-sm-ghost">Folio vs Commander One</a></div>
       </div>
       <div class="card p-8">
@@ -111,8 +111,8 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <h3 class="pt-4 text-xl tracking-[-0.02em] text-ink">How Folio compares with other Mac Finder alternatives</h3>
         <p>Commander One, ForkLift, Path Finder and Marta are well-known names, and each suits different people. If you are comparing the best Mac Finder alternatives, we suggest listing what you do every day, such as dual panes, remote connections or search, and trying each app against that list. <span translate="no">{site.name}</span> is built for people who value safe operations, fast search and a clear price. Read our <a href="/compare/commander-one-alternative/" class="text-link underline underline-offset-4">Folio vs Commander One comparison</a>, or the <a href="/compare/forklift-alternative/" class="text-link underline underline-offset-4">ForkLift</a>, <a href="/compare/path-finder-alternative/" class="text-link underline underline-offset-4">Path Finder</a> and <a href="/compare/marta-alternative/" class="text-link underline underline-offset-4">Marta</a> pages, or our guide to the <a href="/best-mac-file-manager/" class="text-link underline underline-offset-4">best Mac file manager</a>.</p>
 
-        <h3 class="pt-4 text-xl tracking-[-0.02em] text-ink">Free trial and pricing</h3>
-        <p>If you are searching for a free or open-source Mac Finder alternative, note that <span translate="no">{site.name}</span> is commercial software. You get a {site.trialDays}-day free trial, then a one-time {site.price.label} license, sold directly with no App Store account needed. It runs on {site.minMacOS} or later.</p>
+        <h3 class="pt-4 text-xl tracking-[-0.02em] text-ink">Pricing</h3>
+        <p>If you are searching for a free or open-source Mac Finder alternative, note that <span translate="no">{site.name}</span> is commercial software. It is a one-time {site.price.label} license, sold directly with no App Store account needed. It runs on {site.minMacOS} or later.</p>
 
         <p>Ready to switch? <a href="/download/" class="text-link underline underline-offset-4">Download {site.name} for Mac</a> and see whether it is the file manager you have been missing, or read how it works on the <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Finder alternative</a> feature page.</p>
       </div>

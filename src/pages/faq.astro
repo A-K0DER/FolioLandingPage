@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 const faqs = [
   ['Is Folio a replacement for Finder?', 'Folio is a Finder alternative. You can keep using Finder whenever you like.'],
-  ['Is there a free trial?', `Yes, ${site.trialDays} days. After that a license is needed.`],
   ['Which Macs are supported?', `${site.minMacOS} or later.`],
   ['How many Macs can I use a license on?', 'One Mac per license. You can move it to another Mac by deactivating it first.'],
   ['Is it on the App Store?', 'No. Folio is sold directly.'],
@@ -26,7 +25,7 @@ const basics = [
 const all = [...faqs, ...basics];
 const jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Layout title="FAQ" description="Answers about Folio and Mac file managers: how to open the file manager on Mac, where Finder is, what it is called, pricing, trial and privacy." jsonLd={jsonLd}>
+<Layout title="FAQ" description="Answers about Folio and Mac file managers: how to open the file manager on Mac, where Finder is, what it is called, pricing and privacy." jsonLd={jsonLd}>
   <section class="container-x max-w-3xl py-24">
     <p class="eyebrow">FAQ</p><h1 class="display mt-4 !text-5xl">Questions, answered.</h1>
     <div class="mt-12 divide-y divide-hairline border-y border-hairline">

@@ -5,17 +5,16 @@ import { site } from '../data/site';
 const inc = ['Plain-English search and Quick Open', 'Tabs, details pane and operations queue', 'Archive extraction (ZIP, TAR, 7Z)', 'One Mac per license, movable by deactivating', 'Sold directly, no App Store', 'No analytics or tracking'];
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Product', name: `${site.name} for Mac`, description: site.description, offers: { '@type': 'Offer', price: site.price.amount, priceCurrency: site.price.currency, availability: 'https://schema.org/InStock', url: `${site.url}/pricing/` } };
 ---
-<Layout title="Pricing" description={`Folio has a ${site.trialDays}-day free trial, then needs a license (${site.price.label}).`} jsonLd={jsonLd}>
+<Layout title="Pricing" description={`Folio is a one-time ${site.price.label} license, one Mac per license, sold directly.`} jsonLd={jsonLd}>
   <section class="container-x py-24 text-center">
     <p class="eyebrow">Pricing</p>
     <h1 class="display mx-auto mt-4 max-w-3xl !text-5xl sm:!text-6xl">One price. Everything included.</h1>
-    <p class="lead mx-auto mt-5 max-w-xl">Try it free for {site.trialDays} days, then buy a license.</p>
+    <p class="lead mx-auto mt-5 max-w-xl">Buy once, use it on one Mac.</p>
     <div class="mx-auto mt-12 max-w-md rounded-lg border border-hairline bg-elevated p-8 text-left shadow-whisper">
       <p class="eyebrow">License</p>
       <p class="mt-3 text-6xl font-semibold tracking-[-0.05em] text-ink">{site.price.label}<span class="ml-2 text-base font-normal tracking-normal text-mute"></span></p>
       <ul class="mt-6 space-y-3 text-sm">{inc.map((i) => <li class="flex gap-2"><span class="text-link" aria-hidden="true">✓</span>{i}</li>)}</ul>
       <a href={site.checkoutUrl} class="btn-primary mt-8 w-full">Buy {site.name} for {site.price.label}</a>
-      <a href="/download/" class="btn-secondary mt-3 w-full">{site.trialDays ? `Start ${site.trialDays}-Day Free Trial` : 'Download'}</a>
       <p class="mt-4 text-center text-xs text-mute">The internet is used only when you click Activate or Deactivate.</p>
     </div>
   </section>

@@ -8,7 +8,7 @@ const criteria: [string, string][] = [
   ['Safe file operations', 'Look for Trash on delete, no silent overwrites and undo. Folio offers all three.'],
   ['Tabs and navigation', 'A good file manager for Mac has tabs that persist, a clickable address bar and a fast way to jump to folders, like Folio’s ⌘P Quick Open.'],
   ['Archive support', 'Browse and extract ZIP, TAR and 7Z without leaving the app.'],
-  ['Clear pricing and privacy', `Know what it costs and what it collects. Folio is ${site.price.label} after a ${site.trialDays}-day trial, with no analytics or tracking.`],
+  ['Clear pricing and privacy', `Know what it costs and what it collects. Folio is ${site.price.label} one-time, with no analytics or tracking.`],
 ];
 const others = [
   ['Commander One', '/compare/commander-one-alternative/'],
@@ -33,7 +33,7 @@ const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: 'Ho
     <ul class="mt-6 grid gap-3 sm:grid-cols-2">
       {others.map(([n, h]) => <li><a href={h} class="card block transition-colors hover:bg-hairline-soft"><span class="text-base font-medium text-ink">Folio vs {n}</span></a></li>)}
     </ul>
-    <p class="mt-8 text-base leading-7">Want to see it for yourself? <a href="/download/" class="text-link underline underline-offset-4">Try Folio free for {site.trialDays} days</a>.</p>
+    <p class="mt-8 text-base leading-7">Want to see it for yourself? <a href="/download/" class="text-link underline underline-offset-4">See Folio pricing</a>.</p>
   </section>
   <CTA />
 </Layout>

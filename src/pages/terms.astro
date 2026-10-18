@@ -3,13 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import Prose from '../components/Prose.astro';
 import { site } from '../data/site';
 ---
-<Layout title="Terms & Conditions" description="The terms that apply when you use the Folio website and the Folio app for Mac, including licensing, trial and refunds.">
+<Layout title="Terms & Conditions" description="The terms that apply when you use the Folio website and the Folio app for Mac, including licensing and refunds.">
   <Prose eyebrow="Legal" title="Terms & Conditions" lead="By downloading, buying or using Folio you agree to these terms." updated="October 18, 2026">
     <h2>License</h2>
     <p>Subject to these terms, we grant you a personal, non-exclusive, non-transferable license to install and use Folio on Macs you own or control. You may not copy, resell, sublicense, reverse engineer or redistribute Folio except where the law allows it.</p>
 
-    <h2>Free trial</h2>
-    <p>Folio includes a {site.trialDays}-day free trial. After the trial, you need a paid license to keep using the app.</p>
 
     <h2>Purchases and refunds</h2>
     <p>The license price is shown on the <a href="/pricing/">pricing page</a> at checkout. Payments are handled by a third-party payment processor. You can request a full refund as long as you have not activated your license key. Once a license key has been used, the purchase is no longer refundable, except where required by law. To request a refund, email <a href={`mailto:${site.supportEmail}`}>{site.supportEmail}</a> with your purchase email.</p>
