@@ -1,4 +1,0 @@
-# Copy to .dev.vars (git-ignored) for `wrangler dev`.
-FOLIO_LICENSE_PRIVATE_KEY=
-DODO_WEBHOOK_SECRET=
-RESEND_API_KEY=
