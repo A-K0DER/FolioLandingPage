@@ -8,14 +8,20 @@ export function getStaticPaths() {
 }
 const { r } = Astro.props;
 const path = `/compare/${r.slug}/`;
-const rows: [string, string][] = [
+const folio: [string, string][] = [
+  ['Layout', 'One Explorer-style window with tabs, address bar, sidebar and details pane'],
   ['Search', 'Plain-English queries become removable filter chips (file names only)'],
   ['File safety', 'Delete goes to the Trash, nothing overwritten silently, every operation can be undone'],
-  ['Navigation', 'Tabs, clickable address bar, sidebar with eject, details pane, ⌘P Quick Open'],
+  ['Folder tools', 'Quick Open (⌘P) and per-folder sort and columns'],
+  ['Other', 'Operations queue with progress and cancel'],
   ['Archives', 'Look inside and extract ZIP, TAR and 7Z; compress to ZIP'],
   ['Price', `${site.price.label}, one Mac per license, ${site.trialDays}-day free trial`],
+  ['Price and trial', `${site.price.label}, one Mac per license, ${site.trialDays}-day free trial`],
+  ['Price and status', `${site.price.label} after a ${site.trialDays}-day free trial; released as version ${site.version}`],
+  ['Minimum macOS', site.minMacOS],
   ['Privacy', 'No analytics or tracking; the internet is used only to activate or deactivate'],
 ];
+const folioFor: Record<string, string> = Object.fromEntries(folio);
 const faqs = [
   [`Is Folio a ${r.name} alternative?`, `Folio is a Mac Finder alternative that some people use instead of ${r.name}. Try it free for ${site.trialDays} days to see whether it fits how you work.`],
   [`Is Folio free like some ${r.name} alternatives?`, `No. Folio has a ${site.trialDays}-day free trial, then a one-time ${site.price.label} license.`],
@@ -33,16 +39,20 @@ const jsonLd = [
     <p class="lead mt-5 max-w-2xl">{r.intro}</p>
     <p class="mt-4 max-w-2xl text-base leading-7">{r.who}</p>
 
-    <h2 class="h2 mt-16">What <span translate="no">{site.name}</span> offers</h2>
+    <h2 class="h2 mt-16">Folio vs {r.name}</h2>
     <div class="mt-6 overflow-x-auto rounded-md border border-hairline bg-elevated">
       <table class="w-full min-w-xl text-left text-sm">
-        <caption class="sr-only">What Folio offers</caption>
+        <caption class="sr-only">Folio compared with {r.name}</caption>
+        <thead class="border-b border-hairline bg-canvas text-ink"><tr><th scope="col" class="px-5 py-3 font-medium">&nbsp;</th><th scope="col" class="px-5 py-3 font-medium" translate="no">Folio</th><th scope="col" class="px-5 py-3 font-medium" translate="no">{r.name}</th></tr></thead>
         <tbody class="divide-y divide-hairline">
-          {rows.map(([k, v]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{v}</td></tr>)}
+          {r.rows.map(([k, v]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{folioFor[k] ?? 'Not a listed feature'}</td><td class="px-5 py-3">{v}</td></tr>)}
         </tbody>
       </table>
     </div>
-    <p class="mt-3 text-xs text-mute">We do not list {r.name} features here. Check its own website for current features and pricing. Product names belong to their owners.</p>
+    <p class="mt-3 text-xs text-mute">{r.name} details from {r.asOf}, checked October 18, 2026. Features and prices change, so confirm on the official site. Product names belong to their owners.</p>
+
+    <h2 class="h2 mt-16">Which should you choose?</h2>
+    <p class="mt-4 max-w-2xl text-base leading-7">{r.pick}</p>
 
     <h2 class="h2 mt-16">How to choose</h2>
     <p class="mt-4 max-w-2xl text-base leading-7">Write down what you do every day, such as searching, moving large batches, browsing archives or working across folders. Then try each app against that list. Folio is a good fit when safe file operations, quick search and a clear price matter most. Read <a href="/best-mac-file-manager/" class="text-link underline underline-offset-4">how to choose the best Mac file manager</a>, or see the <a href="/compare/commander-one-alternative/" class="text-link underline underline-offset-4">Commander One comparison</a>.</p>
