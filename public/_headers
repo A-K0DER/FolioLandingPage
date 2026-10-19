@@ -4,3 +4,8 @@ https://folio-landing-page.pages.dev/*
 /.well-known/api-catalog
   Content-Type: application/linkset+json; charset=utf-8
   Access-Control-Allow-Origin: *
+
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog"
+  Link: </openapi.json>; rel="service-desc"; type="application/vnd.oai.openapi+json"
+  Link: </support/>; rel="service-doc"; type="text/html"
