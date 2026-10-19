@@ -60,6 +60,8 @@ export const featurePages = [
   { slug: 'search', title: 'Plain-English Search', blurb: 'Type "pdfs bigger than 10 MB modified last week" and get results.' },
   { slug: 'safe-file-operations', title: 'Safe File Operations', blurb: 'Trash on delete, verified moves, and undo for every operation.' },
   { slug: 'archives', title: 'Archives', blurb: 'Look inside ZIP, TAR and 7Z, then extract.' },
+  { slug: 'group-by-category', title: 'Group by Category', blurb: 'Sort a folder into Videos, Images, PDFs and more, with fold-away headers and a size for each group.' },
+  { slug: 'storage-breakdown', title: 'Storage Breakdown', blurb: 'See what is taking up space in a folder, split by category, without leaving the details pane.' },
 ] as const;
 
 // Competitor details are deliberately limited to what is widely known. Verify on each product's own site before adding specifics.

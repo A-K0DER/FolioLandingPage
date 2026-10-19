@@ -29,6 +29,18 @@ const copy: Record<string, { h1: string; desc: string; intro: string; points: [s
     intro: 'See what is in an archive before it lands in your folder.',
     points: [['ZIP, TAR and 7Z', 'Extract the formats you meet most.'], ['Look inside first', 'Browse an archive before extracting it.'], ['Compress to ZIP', 'Available from the right-click menu.']],
   },
+  'group-by-category': {
+    h1: 'Group a folder by what is in it.',
+    desc: 'Group by Category in Folio for Mac sorts a folder into Videos, Images, Audio, PDFs, Documents, Archives, Apps, Code and more, with a header showing item count and size.',
+    intro: 'Turn on View > Group by Category (⌃⌘G) and a crowded folder splits into ten kinds. Folio remembers the setting for each folder.',
+    points: [['Ten categories', 'Folders, Videos, Images, Audio, PDFs, Documents, Archives, Apps, Code and Other. Empty groups are hidden, and .app bundles count as Apps. Grouping and search share one definition of each kind, so they always agree.'], ['Fold-away headers', 'Each group gets a header such as "Videos — 12 items, 3.4 GB". Click it to fold or unfold the group. Headers are skipped by Select All, arrow keys and type-to-select, and VoiceOver reads them as buttons.'], ['Your sort still applies', 'Name, size, date and kind sorting work inside each group. Folders come first with Folders First on, and last with it off. Groups update live as files come and go, and your selection is kept.']],
+  },
+  'storage-breakdown': {
+    h1: 'See what is using the space in a folder.',
+    desc: 'With nothing selected, the Folio details pane shows a storage breakdown: a coloured bar and a list by category, counting everything inside, including subfolders.',
+    intro: 'Select nothing and the details pane shows where the space goes, split by the same ten categories used for grouping.',
+    points: [['Bar and list', 'A coloured bar split by category, then lines like "Videos 18.2 GB · 41 files", largest first, plus a total. Sizes are space on disk, and symlinks are skipped so nothing is counted twice.'], ['Runs in the background', 'It shows "Calculating…" with a running total, and stops when you change folder or close the pane. .app bundles count as one item, with their size included in the totals.'], ['Honest about gaps', 'Files that are not downloaded from iCloud are noted ("+ 120 files in iCloud, not downloaded") and never downloaded. Folders Folio cannot read are reported as "Couldn\'t read N folders", not skipped silently.']],
+  },
 };
 export function getStaticPaths() {
   return featurePages.map((f) => ({ params: { slug: f.slug }, props: { f } }));

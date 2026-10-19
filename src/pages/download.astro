@@ -14,5 +14,19 @@ const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UT
         <div class="flex justify-between gap-4 px-5 py-3"><dt class="text-mute">{k}</dt><dd class="text-ink">{v}</dd></div>
       ))}
     </dl>
+
+    <h2 id="install" class="h2 mt-16">How to install</h2>
+    <p class="lead mt-3"><span translate="no">{site.name}</span> is not yet notarized by Apple, so macOS shows a warning the first time you open it. This is expected, and you only need to do the steps below once.</p>
+    <ol class="mt-6 space-y-5 text-base leading-7">
+      <li><strong class="text-ink">1. Open the download.</strong> Double-click the .dmg file, then drag <span translate="no">{site.name}</span> into your Applications folder.</li>
+      <li><strong class="text-ink">2. Try to open it.</strong> Launch <span translate="no">{site.name}</span> from Applications. macOS will say it cannot verify the app. Click <em>Done</em> (or <em>Cancel</em>).</li>
+      <li><strong class="text-ink">3. Allow it in System Settings.</strong> Open <em>System Settings → Privacy &amp; Security</em>, scroll to the Security section, and click <em>Open Anyway</em> next to <span translate="no">{site.name}</span>. Enter your password if asked, then click <em>Open</em>.</li>
+    </ol>
+    <p class="mt-6 text-sm leading-6">On macOS 14 or earlier you can skip step 3: right-click (or Control-click) <span translate="no">{site.name}</span> in Applications, choose <em>Open</em>, then click <em>Open</em> again.</p>
+
+    <h3 class="mt-10 text-xl tracking-[-0.02em] text-ink">Still blocked, or "app is damaged"?</h3>
+    <p class="mt-2 text-sm leading-6">Quarantine flags added by the browser can cause this. Open Terminal and run the command below, then launch the app again.</p>
+    <pre class="mt-3 overflow-x-auto rounded-md border border-hairline bg-elevated px-4 py-3 text-sm"><code>xattr -dr com.apple.quarantine /Applications/Folio.app</code></pre>
+    <p class="mt-6 text-sm leading-6">We are working on Apple notarization, after which these steps will no longer be needed.</p>
   </section>
 </Layout>
