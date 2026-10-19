@@ -14,14 +14,19 @@ const folio: [string, string][] = [
   ['File safety', 'Delete goes to the Trash, nothing overwritten silently, every operation can be undone'],
   ['Folder tools', 'Quick Open (⌘P) and per-folder sort and columns'],
   ['Other', 'Operations queue with progress and cancel'],
+  ['Extras', 'Operations queue with progress and cancel, group by category, storage breakdown'],
   ['Archives', 'Look inside and extract ZIP, TAR and 7Z; compress to ZIP'],
-  ['Price', `${site.price.label}, one-time, one Mac per license`],
   ['Price', `${site.price.label}, one-time, one Mac per license`],
   ['Price and status', `${site.price.label} one-time; released as version ${site.version}`],
   ['Minimum macOS', site.minMacOS],
   ['Privacy', 'No analytics or tracking; the internet is used only to activate or deactivate'],
 ];
 const folioFor: Record<string, string> = Object.fromEntries(folio);
+// Folio features with no matching row in the rival's list, so they are not left out of the table.
+const folioOnly: [string, string][] = [
+  ['Group by Category', 'Splits a folder into ten kinds (Videos, Images, PDFs and more) with fold-away headers showing item count and size (⌃⌘G)'],
+  ['Storage breakdown', 'With nothing selected, the details pane shows a coloured bar and list of space used by category, including subfolders'],
+];
 const faqs = [
   [`Is Folio a ${r.name} alternative?`, `Folio is a Mac Finder alternative that some people use instead of ${r.name}. See whether it fits how you work.`],
   [`Is Folio free like some ${r.name} alternatives?`, `No. Folio is a one-time ${site.price.label} license.`],
@@ -45,7 +50,8 @@ const jsonLd = [
         <caption class="sr-only">Folio compared with {r.name}</caption>
         <thead class="border-b border-hairline bg-canvas text-ink"><tr><th scope="col" class="px-5 py-3 font-medium">&nbsp;</th><th scope="col" class="px-5 py-3 font-medium" translate="no">Folio</th><th scope="col" class="px-5 py-3 font-medium" translate="no">{r.name}</th></tr></thead>
         <tbody class="divide-y divide-hairline">
-          {r.rows.map(([k, v]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{folioFor[k] ?? 'Not a listed feature'}</td><td class="px-5 py-3">{v}</td></tr>)}
+          {r.rows.map(([k, v]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{folioFor[k] ?? 'Not a listed Folio feature'}</td><td class="px-5 py-3">{v}</td></tr>)}
+          {folioOnly.map(([k, v]) => <tr><th scope="row" class="px-5 py-3 font-medium text-ink">{k}</th><td class="px-5 py-3">{v}</td><td class="px-5 py-3 text-mute">Not listed on its site</td></tr>)}
         </tbody>
       </table>
     </div>
