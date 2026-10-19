@@ -1,0 +1,36 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Folio website API",
+    "version": "1.0.0",
+    "description": "Email sign-up endpoint for Folio, the Mac file manager."
+  },
+  "servers": [{ "url": "https://mac-folio.com" }],
+  "paths": {
+    "/api/subscribe": {
+      "post": {
+        "operationId": "subscribe",
+        "summary": "Subscribe an email address to Folio updates",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "required": ["email"],
+                "properties": {
+                  "email": { "type": "string", "format": "email", "maxLength": 254 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": { "description": "Subscribed" },
+          "400": { "description": "Invalid email" },
+          "503": { "description": "Sign-ups not configured" }
+        }
+      }
+    }
+  }
+}

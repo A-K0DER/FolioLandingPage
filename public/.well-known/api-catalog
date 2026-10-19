@@ -1,0 +1,13 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://mac-folio.com/api/subscribe",
+      "service-desc": [
+        { "href": "https://mac-folio.com/openapi.json", "type": "application/vnd.oai.openapi+json" }
+      ],
+      "service-doc": [
+        { "href": "https://mac-folio.com/support/", "type": "text/html" }
+      ]
+    }
+  ]
+}

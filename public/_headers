@@ -1,2 +1,6 @@
 https://folio-landing-page.pages.dev/*
   X-Robots-Tag: noindex
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; charset=utf-8
+  Access-Control-Allow-Origin: *
