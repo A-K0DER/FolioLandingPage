@@ -1,0 +1,16 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import { guides } from '../../data/site';
+---
+<Layout title="Mac File Management Guides" description="Short how-to guides for Mac file management: find large files, check folder size, undo a file move, open 7z archives and sort files by type.">
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">Guides</p>
+    <h1 class="display mt-4 !text-5xl sm:!text-6xl">Mac file management guides.</h1>
+    <p class="lead mt-5">Short how-tos for everyday file tasks, with the Finder method and the Folio method side by side.</p>
+    <ul class="mt-12 grid gap-3 sm:grid-cols-2">
+      {guides.map((g) => <li><a href={`/guides/${g.slug}/`} class="card block transition-colors hover:bg-hairline-soft"><span class="text-base font-medium text-ink">{g.title}</span></a></li>)}
+    </ul>
+  </section>
+  <CTA />
+</Layout>

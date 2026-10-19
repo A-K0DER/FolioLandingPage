@@ -20,7 +20,9 @@ const folio: [string, string][] = [
   ['Price and status', `${site.price.label} one-time; released as version ${site.version}`],
   ['Minimum macOS', site.minMacOS],
   ['Privacy', 'No analytics or tracking; the internet is used only to activate or deactivate'],
+  ['Platforms', `Built only for Mac (${site.minMacOS} or later)`],
 ];
+const checked = 'checked' in r ? r.checked : 'October 18, 2026';
 const folioFor: Record<string, string> = Object.fromEntries(folio);
 // Folio features with no matching row in the rival's list, so they are not left out of the table.
 const folioOnly: [string, string][] = [
@@ -55,7 +57,7 @@ const jsonLd = [
         </tbody>
       </table>
     </div>
-    <p class="mt-3 text-xs text-mute">{r.name} details from {r.asOf}, checked October 18, 2026. Features and prices change, so confirm on the official site. Product names belong to their owners.</p>
+    <p class="mt-3 text-xs text-mute">{r.name} details from {r.asOf}, checked {checked}. Features and prices change, so confirm on the official site. Product names belong to their owners.</p>
 
     <h2 class="h2 mt-16">Which should you choose?</h2>
     <p class="mt-4 max-w-2xl text-base leading-7">{r.pick}</p>

@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
-import { site } from '../data/site';
+import { site, rivals } from '../data/site';
 
 const criteria: [string, string][] = [
   ['Search that finds things fast', `Folio lets you type "pdfs bigger than 10 MB modified last week" and turns it into filters you can see and remove.`],
@@ -10,12 +10,10 @@ const criteria: [string, string][] = [
   ['Archive support', 'Browse and extract ZIP, TAR and 7Z without leaving the app.'],
   ['Clear pricing and privacy', `Know what it costs and what it collects. Folio is ${site.price.label} one-time, with no analytics or tracking.`],
 ];
-const others = [
+const others: [string, string][] = [
   ['Commander One', '/compare/commander-one-alternative/'],
-  ['ForkLift', '/compare/forklift-alternative/'],
-  ['Path Finder', '/compare/path-finder-alternative/'],
-  ['Marta', '/compare/marta-alternative/'],
-] as const;
+  ...rivals.map((r): [string, string] => [r.name, `/compare/${r.slug}/`]),
+];
 const jsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: 'How to choose the best Mac file manager', url: `${site.url}/best-mac-file-manager/` };
 ---
 <Layout title="Best Mac File Manager: What to Look For" description="How to choose the best Mac file manager app and Finder alternative: search, safe file operations, tabs, archives and pricing. See where Folio fits." jsonLd={jsonLd}>
