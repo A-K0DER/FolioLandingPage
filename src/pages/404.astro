@@ -1,6 +1,15 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Page Not Found" noindex>
-  <section class="container-x py-32 text-center"><p class="eyebrow">404</p><h1 class="display mt-4 !text-5xl">Page not found.</h1><a href="/" class="btn-primary mt-8">Back Home</a></section>
+<Layout title="Page Not Found" description="The page you are looking for does not exist or has moved." noindex>
+  <section class="container-x py-32 text-center">
+    <p class="eyebrow">404</p>
+    <h1 class="display mt-4 !text-5xl">Page not found.</h1>
+    <p class="lead mx-auto mt-4 max-w-xl">That link may be broken or the page may have moved. Try one of these instead.</p>
+    <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <a href="/" class="btn-primary">Back Home</a>
+      <a href="/download/" class="btn-secondary">Download</a>
+      <a href="/support/" class="btn-secondary">Get Support</a>
+    </div>
+  </section>
 </Layout>

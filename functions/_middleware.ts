@@ -6,7 +6,13 @@ const wantsMarkdown = (accept: string) =>
     return type.trim().toLowerCase() === 'text/markdown' && !params.some((p) => /^\s*q=0(\.0*)?\s*$/.test(p));
   });
 
-export const onRequest: PagesFunction = async ({ request, next, env }) => {
+// Serves the static /500 page (src/pages/500.astro) with a 500 status for page requests that fail.
+const serverError = async (env: { ASSETS: Fetcher }, url: URL) => {
+  const page = await env.ASSETS.fetch(new URL('/500', url));
+  return new Response(page.body, { status: 500, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+};
+
+const handle: PagesFunction = async ({ request, next, env }) => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.pathname.startsWith('/api/')) return next();
   if (!wantsMarkdown(request.headers.get('Accept') ?? '')) {
@@ -26,4 +32,15 @@ export const onRequest: PagesFunction = async ({ request, next, env }) => {
       'x-markdown-tokens': String(Math.ceil(text.length / 4)),
     },
   });
+};
+
+export const onRequest: PagesFunction = async (ctx) => {
+  const { request } = ctx;
+  const isPage = request.method === 'GET' && !new URL(request.url).pathname.startsWith('/api/');
+  try {
+    const res = await handle(ctx);
+    return isPage && res.status >= 500 ? serverError(ctx.env as { ASSETS: Fetcher }, new URL(request.url)) : res;
+  } catch {
+    return isPage ? serverError(ctx.env as { ASSETS: Fetcher }, new URL(request.url)) : new Response('Internal Server Error', { status: 500 });
+  }
 };
