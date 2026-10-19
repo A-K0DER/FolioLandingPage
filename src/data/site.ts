@@ -10,7 +10,9 @@ export const site = {
   version: '1.0.0', // TODO
   minMacOS: 'macOS 14', 
   releaseDate: '2026-10-01', // TODO
-  price: { amount: 19.99, currency: 'USD', label: '$19.99' },
+  // Launch offer: $9.99 for the first 50 customers, then back to the regular price.
+  // The checkout product price (Dodo Payments) must be changed to match.
+  price: { amount: 9.99, currency: 'USD', label: '$9.99', regularLabel: '$19.99', launchLimit: 50 },
   // TODO: point these at your DMG and your checkout (Dodo Payments / Paddle / Lemon Squeezy)
   downloadUrl: '/downloads/Folio-1.0.0.dmg',
   checkoutUrl: 'https://checkout.dodopayments.com/buy/pdt_0Nq1fGt8Ixf2XOrna9nfR?quantity=1',
