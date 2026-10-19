@@ -1,0 +1,31 @@
+---
+import { site } from '../data/site';
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+{site.emailCapture && (
+  <form class:list={['max-w-md', cls]} method="post" action="/api/subscribe" data-email-capture>
+    <label for="capture-email" class="text-sm text-ink">Get setup tips and launch updates</label>
+    <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+      <input id="capture-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com" class="w-full rounded-md border border-hairline bg-elevated px-3 py-2 text-sm text-ink" />
+      <button type="submit" class="btn-secondary">Send me tips</button>
+    </div>
+    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
+    <p class="mt-2 text-xs text-mute" role="status" aria-live="polite" data-status>A few emails, no spam. Unsubscribe any time.</p>
+  </form>
+)}
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-email-capture]');
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const status = form.querySelector('[data-status]')!;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form) });
+      if (!res.ok) throw new Error();
+      form.reset();
+      status.textContent = 'Thanks, you are on the list.';
+    } catch {
+      status.textContent = 'Something went wrong. Please try again.';
+    }
+  });
+</script>

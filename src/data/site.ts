@@ -16,6 +16,8 @@ export const site = {
   checkoutUrl: 'https://checkout.dodopayments.com/buy/pdt_0Nq1fGt8Ixf2XOrna9nfR?quantity=1',
   supportEmail: 'ayushk199923@gmail.com', // TODO: switch to support@mac-folio.com once email routing is set up
   twitter: '', // TODO
+  // Set true once the SUBSCRIBERS KV namespace is bound to the Pages project (see functions/api/subscribe.ts).
+  emailCapture: false,
 } as const;
 
 export const nav = [
