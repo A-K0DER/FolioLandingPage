@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import AppleIcon from '../components/AppleIcon.astro';
+import GatekeeperNote from '../components/GatekeeperNote.astro';
 ---
 <Layout title="Thank You" description={`Thanks for buying ${site.name}. Your license key is on its way.`} noindex>
   <section class="container-x max-w-3xl py-24">
@@ -17,6 +18,7 @@ import AppleIcon from '../components/AppleIcon.astro';
       <a href={site.downloadUrl} class="btn-primary"><AppleIcon />Download .dmg</a>
       <a href="/support/" class="btn-secondary">Didn't get the email?</a>
     </div>
+    <GatekeeperNote class="mt-4 max-w-md" />
     <p class="mt-8 text-sm text-mute">You can also find your key any time in the customer portal link in the receipt, or email <a href={`mailto:${site.supportEmail}`} class="underline">{site.supportEmail}</a>.</p>
   </section>
 </Layout>

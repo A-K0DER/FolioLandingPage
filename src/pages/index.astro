@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import AppWindow from '../components/AppWindow.astro';
 import CTA from '../components/CTA.astro';
 import AppleIcon from '../components/AppleIcon.astro';
+import GatekeeperNote from '../components/GatekeeperNote.astro';
 import { site, featurePages } from '../data/site';
 
 const pillars = [
@@ -11,6 +12,7 @@ const pillars = [
   { t: 'Quick Open', d: 'Press ⌘P and jump to any folder by typing a few letters.' },
   { t: 'Archives', d: 'Extract ZIP, TAR and 7Z, and look inside them before extracting.' },
   { t: 'Explorer-style layout', d: 'Tabs, a clickable address bar, a sidebar with drives and eject, a status bar and a details pane.' },
+  { t: 'Storage breakdown', d: 'See what is filling a folder, split by category, right in the details pane.' },
   { t: 'List to large icons', d: 'One slider covers every view. Sort and columns are remembered per folder, and tabs reopen at launch.' },
 ];
 const jsonLd = {
@@ -23,24 +25,45 @@ const faqs = [
   ['What is the best Mac Finder alternative?', 'It depends on what you need. Folio is a Mac Finder alternative for people who want tabs, plain-English search, Quick Open and undoable file operations in one app. Compare it with Finder and other Mac file managers.'],
   ['Is there a free Mac Finder alternative?', 'No. Folio is a one-time paid license. It is not a free or open-source app.'],
   ['How is Folio different from Commander One, ForkLift, Path Finder or Marta?', 'Those are established Mac file managers with their own strengths. Folio focuses on plain-English search, safe file operations and a familiar Explorer-style layout, with the price shown up front. See our Commander One comparison for details.'],
+  ['Is there a Windows Explorer for Mac?', 'Folio is the closest thing: an Explorer-style file manager for Mac with tabs, a clickable address bar, a sidebar with drives and eject, a details pane and a status bar.'],
+  ['Does Folio have a subscription?', 'No. Folio is a one-time purchase of $19.99 per license, for one Mac. You can move the license to another Mac by deactivating the first.'],
+  ['Why does macOS say Folio is from an unidentified developer?', 'Folio is made by a solo indie developer and is not yet notarized by Apple, so macOS shows a warning on first launch. It is expected. Right-click Folio, choose Open, then Open again. On newer macOS versions, use Open Anyway in System Settings. See the install guide on the download page.'],
   ['Can I still use Finder?', 'Yes. Folio sits alongside Finder, so you can use either whenever you like.'],
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Layout title="Mac Finder Alternative: Folio File Manager for Mac" description="Folio is a Mac Finder alternative and file manager app for macOS: plain-English search, tabs, Quick Open, safe file operations and undo." jsonLd={[jsonLd, faqLd]}>
+<Layout title="Mac Finder Alternative: Tabbed File Manager, $19.99 Once" description="Folio is a tabbed file manager for Mac with an Explorer-style layout, a clickable address bar, plain-English search and undo. A one-time $19.99 Finder alternative, no subscription." jsonLd={[jsonLd, faqLd]}>
   <section class="relative overflow-hidden">
     <div class="mesh pointer-events-none absolute inset-x-0 -top-10 h-130" aria-hidden="true"></div>
     <div class="container-x relative pb-16 pt-20 text-center sm:pt-28">
-      <p class="eyebrow rise">Finder alternative for macOS</p>
-      <h1 class="display rise mx-auto mt-5 max-w-4xl" style="animation-delay:60ms">The Mac Finder alternative built for your&nbsp;files.</h1>
-      <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a file manager for Mac, and a Finder alternative, with plain-English search, safe file operations, tabs and Quick Open.</p>
+      <p class="eyebrow rise">Tabbed file manager for macOS</p>
+      <h1 class="display rise mx-auto mt-5 max-w-4xl" style="animation-delay:60ms">The Mac Finder alternative with tabs, search and&nbsp;undo.</h1>
+      <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a Finder alternative with an Explorer-style layout: tabs, a clickable address bar, plain-English search and undo for every file operation. One purchase, no subscription.</p>
       <div class="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="animation-delay:180ms">
         <a href="/download/" class="btn-primary w-full sm:w-auto"><AppleIcon />Download for Mac</a>
         <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
       </div>
-      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license</p>
+      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license · {site.price.label} once</p>
+      <GatekeeperNote class="mx-auto mt-2 max-w-md" />
     </div>
     <div class="container-x relative max-w-5xl pb-24"><AppWindow /></div>
+  </section>
+
+  <section class="border-t border-hairline" aria-labelledby="explorer-layout">
+    <div class="container-x grid gap-10 py-24 lg:grid-cols-2 lg:items-start">
+      <div>
+        <p class="eyebrow">Windows Explorer for Mac</p>
+        <h2 id="explorer-layout" class="h2 mt-3">An Explorer-style file manager for Mac</h2>
+        <p class="lead mt-4">Moving over from Windows, or just tired of guessing where you are? <span translate="no">{site.name}</span> gives macOS the structure of Windows Explorer, built natively for {site.minMacOS} or later.</p>
+      </div>
+      <ul class="space-y-3 text-base leading-7">
+        <li><strong class="text-ink">Tabs that come back.</strong> Keep project folders open in tabs and have them reopen at launch, like a tabbed file manager should.</li>
+        <li><strong class="text-ink">A clickable address bar.</strong> The full path is always visible. Click any folder in the breadcrumbs to jump straight there.</li>
+        <li><strong class="text-ink">Sidebar with drives and eject.</strong> External drives sit in the sidebar with an eject button beside them.</li>
+        <li><strong class="text-ink">Details pane and status bar.</strong> Size, dates and item counts stay on screen, so you never open Get Info just to check a file.</li>
+        <li><strong class="text-ink">Storage breakdown.</strong> A folder size analyzer for Mac, built in: see which categories use the space, without leaving the folder.</li>
+      </ul>
+    </div>
   </section>
 
   <section class="border-t border-hairline">
@@ -59,15 +82,15 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
     <div class="container-x grid gap-10 py-24 lg:grid-cols-2 lg:items-center">
       <div>
         <p class="eyebrow">Pricing, upfront</p>
-        <h2 class="h2 mt-3">One license. Sold directly.</h2>
-        <p class="lead mt-4">One-time purchase of <span translate="no">{site.name}</span>, one Mac per license. No App Store, no analytics, no tracking.</p>
+        <h2 class="h2 mt-3">A Mac file manager with no subscription.</h2>
+        <p class="lead mt-4">Pay {site.price.label} once for <span translate="no">{site.name}</span>, one Mac per license. No subscription, no App Store, no analytics, no tracking.</p>
         <div class="mt-6 flex gap-3"><a href="/pricing/" class="btn-sm">See Pricing</a><a href="/compare/commander-one-alternative/" class="btn-sm-ghost">Folio vs Commander One</a></div>
       </div>
       <div class="card p-8">
         <p class="eyebrow">License</p>
         <p class="mt-3 text-6xl font-semibold tracking-[-0.05em] text-ink">{site.price.label}</p>
         <ul class="mt-6 space-y-2 text-sm">
-          <li>✓ One Mac per license, movable by deactivating</li><li>✓ Sold directly, no App Store</li><li>✓ No analytics or tracking</li>
+          <li>✓ One-time payment, no subscription</li><li>✓ One Mac per license, movable by deactivating</li><li>✓ Sold directly, no App Store</li><li>✓ No analytics or tracking</li>
         </ul>
       </div>
     </div>
@@ -115,7 +138,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <h3 class="pt-4 text-xl tracking-[-0.02em] text-ink">Pricing</h3>
         <p>If you are searching for a free or open-source Mac Finder alternative, note that <span translate="no">{site.name}</span> is commercial software. It is a one-time {site.price.label} license, sold directly with no App Store account needed. It runs on {site.minMacOS} or later.</p>
 
-        <p>Ready to switch? <a href="/download/" class="text-link underline underline-offset-4">Download {site.name} for Mac</a> and see whether it is the file manager you have been missing, or read how it works on the <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Finder alternative</a> feature page.</p>
+        <p>Ready to switch? <a href="/download/" class="text-link underline underline-offset-4">Download {site.name} for Mac</a> (unsigned for now, so right-click and choose Open the first time) and see whether it is the file manager you have been missing, or read how it works on the <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Finder alternative</a> feature page.</p>
       </div>
 
       <h2 class="h2 mt-16">Frequently asked questions</h2>
