@@ -26,13 +26,13 @@ const faqs = [
   ['Is there a free Mac Finder alternative?', 'No. Folio is a one-time paid license. It is not a free or open-source app.'],
   ['How is Folio different from Commander One, ForkLift, Path Finder or Marta?', 'Those are established Mac file managers with their own strengths. Folio focuses on plain-English search, safe file operations and a familiar Explorer-style layout, with the price shown up front. See our Commander One comparison for details.'],
   ['Is there a Windows Explorer for Mac?', 'Folio is the closest thing: an Explorer-style file manager for Mac with tabs, a clickable address bar, a sidebar with drives and eject, a details pane and a status bar.'],
-  ['Does Folio have a subscription?', 'No. Folio is a one-time purchase of $19.99 per license, for one Mac. You can move the license to another Mac by deactivating the first.'],
+  ['Does Folio have a subscription?', `No. Folio is a one-time purchase of ${site.price.label} per license, for one Mac. You can move the license to another Mac by deactivating the first.`],
   ['Why does macOS say Folio is from an unidentified developer?', 'Folio is made by a solo indie developer and is not yet notarized by Apple, so macOS shows a warning on first launch. It is expected. Right-click Folio, choose Open, then Open again. On newer macOS versions, use Open Anyway in System Settings. See the install guide on the download page.'],
   ['Can I still use Finder?', 'Yes. Folio sits alongside Finder, so you can use either whenever you like.'],
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
 ---
-<Layout title="Mac Finder Alternative: Tabbed File Manager, $19.99 Once" description="Folio is a tabbed file manager for Mac with an Explorer-style layout, a clickable address bar, plain-English search and undo. A one-time $19.99 Finder alternative, no subscription." jsonLd={[jsonLd, faqLd]}>
+<Layout title={`Mac Finder Alternative: Tabbed File Manager, ${site.price.label} Once`} description={`Folio is a tabbed file manager for Mac with an Explorer-style layout, a clickable address bar, plain-English search and undo. A one-time ${site.price.label} Finder alternative, no subscription.`} jsonLd={[jsonLd, faqLd]}>
   <section class="relative overflow-hidden">
     <div class="mesh pointer-events-none absolute inset-x-0 -top-10 h-130" aria-hidden="true"></div>
     <div class="container-x relative pb-16 pt-20 text-center sm:pt-28">
