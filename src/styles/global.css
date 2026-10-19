@@ -32,6 +32,35 @@
   --shadow-float: 0 2px 2px rgb(28 31 34 / 0.05), 0 8px 16px -4px rgb(28 31 34 / 0.10);
 }
 
+/* Dark values. `data-theme` is set before first paint by the inline script in Layout.astro. */
+:root { color-scheme: light; }
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #F2EEE6;
+  --color-body: #C3C7CC;
+  --color-mute: #9AA0A8;
+  --color-faint: #7B838D;
+  --color-hairline: #2E3338;
+  --color-hairline-soft: #23282D;
+  --color-canvas: #121518;
+  --color-elevated: #1A1E22;
+  --color-link: #2DD4BF;
+  --color-link-deep: #5EEAD4;
+  --color-link-soft: #134E48;
+  --color-error: #F97066;
+  --color-paper-deep: #3A3426;
+  --color-graphite: #262A30;
+  --color-on-brand: #0B1F1D;
+  --shadow-whisper: 0 1px 1px rgb(0 0 0 / 0.3);
+  --shadow-float: 0 2px 2px rgb(0 0 0 / 0.3), 0 8px 16px -4px rgb(0 0 0 / 0.5);
+}
+:root[data-theme="dark"] .mesh {
+  background:
+    radial-gradient(40% 50% at 25% 30%, rgb(45 212 191 / 0.16), transparent 70%),
+    radial-gradient(40% 50% at 55% 20%, rgb(226 214 191 / 0.07), transparent 70%),
+    radial-gradient(35% 45% at 80% 30%, rgb(45 212 191 / 0.10), transparent 70%);
+}
+
 @layer base {
   html {
     scroll-padding-top: 5rem; /* sticky header offset for anchors */

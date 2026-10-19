@@ -18,6 +18,10 @@ const path = Astro.url.pathname;
     <div class="flex items-center gap-2">
       <a href="/download/" class="btn-sm-ghost hidden sm:inline-flex"><AppleIcon size={14} />Download</a>
       <a href="/pricing/" class="btn-sm">Buy {site.price.label}</a>
+      <button type="button" id="theme-toggle" class="btn-sm-ghost px-2" aria-label="Switch to dark mode">
+        <svg class="hidden [[data-theme=dark]_&]:block" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M12.6 3.4l-1 1M4.4 11.6l-1 1"/></svg>
+        <svg class="[[data-theme=dark]_&]:hidden" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7Z"/></svg>
+      </button>
       <details class="relative md:hidden">
         <summary class="btn-sm-ghost cursor-pointer list-none px-2" aria-label="Menu">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 4.5h12M2 11.5h12"/></svg>
@@ -30,3 +34,15 @@ const path = Astro.url.pathname;
     </div>
   </div>
 </header>
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const root = document.documentElement;
+  const sync = () => btn?.setAttribute('aria-label', root.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+  sync();
+  btn?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch {}
+    sync();
+  });
+</script>
