@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import AppWindow from '../components/AppWindow.astro';
 import CTA from '../components/CTA.astro';
+import AppleIcon from '../components/AppleIcon.astro';
 import { site, featurePages } from '../data/site';
 
 const pillars = [
@@ -34,7 +35,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
       <h1 class="display rise mx-auto mt-5 max-w-4xl" style="animation-delay:60ms">The Mac Finder alternative built for your&nbsp;files.</h1>
       <p class="lead rise mx-auto mt-6 max-w-2xl" style="animation-delay:120ms"><span translate="no">{site.name}</span> is a file manager for Mac, and a Finder alternative, with plain-English search, safe file operations, tabs and Quick Open.</p>
       <div class="rise mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row" style="animation-delay:180ms">
-        <a href="/download/" class="btn-primary w-full sm:w-auto">Download for Mac</a>
+        <a href="/download/" class="btn-primary w-full sm:w-auto"><AppleIcon />Download for Mac</a>
         <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
       </div>
       <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license</p>

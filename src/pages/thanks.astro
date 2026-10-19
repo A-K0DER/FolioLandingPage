@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
+import AppleIcon from '../components/AppleIcon.astro';
 ---
 <Layout title="Thank You" description={`Thanks for buying ${site.name}. Your license key is on its way.`} noindex>
   <section class="container-x max-w-3xl py-24">
@@ -13,7 +14,7 @@ import { site } from '../data/site';
       <li><span class="text-mute">3.</span> One license covers one Mac. To move it, deactivate on the old Mac first.</li>
     </ol>
     <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-      <a href={site.downloadUrl} class="btn-primary">Download .dmg</a>
+      <a href={site.downloadUrl} class="btn-primary"><AppleIcon />Download .dmg</a>
       <a href="/support/" class="btn-secondary">Didn't get the email?</a>
     </div>
     <p class="mt-8 text-sm text-mute">You can also find your key any time in the customer portal link in the receipt, or email <a href={`mailto:${site.supportEmail}`} class="underline">{site.supportEmail}</a>.</p>

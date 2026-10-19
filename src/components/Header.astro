@@ -1,5 +1,6 @@
 ---
 import { nav, site } from '../data/site';
+import AppleIcon from './AppleIcon.astro';
 const path = Astro.url.pathname;
 ---
 <header class="sticky top-0 z-40 border-b border-hairline bg-canvas/80 backdrop-blur-md">
@@ -15,7 +16,7 @@ const path = Astro.url.pathname;
       ))}
     </nav>
     <div class="flex items-center gap-2">
-      <a href="/download/" class="btn-sm-ghost hidden sm:inline-flex">Download</a>
+      <a href="/download/" class="btn-sm-ghost hidden sm:inline-flex"><AppleIcon size={14} />Download</a>
       <a href="/pricing/" class="btn-sm">Buy {site.price.label}</a>
       <details class="relative md:hidden">
         <summary class="btn-sm-ghost cursor-pointer list-none px-2" aria-label="Menu">
