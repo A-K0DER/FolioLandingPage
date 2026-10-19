@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import CTA from '../../components/CTA.astro';
 import AppleIcon from '../../components/AppleIcon.astro';
 import AppWindow from '../../components/AppWindow.astro';
+import GatekeeperNote from '../../components/GatekeeperNote.astro';
 import { featurePages } from '../../data/site';
 
 const copy: Record<string, { h1: string; desc: string; intro: string; points: [string, string][] }> = {
@@ -55,6 +56,7 @@ const c = copy[f.slug];
     <h1 class="display mt-6 max-w-3xl !text-5xl sm:!text-6xl">{c.h1}</h1>
     <p class="lead mt-5 max-w-2xl">{c.intro}</p>
     <div class="mt-10 flex gap-3"><a href="/download/" class="btn-primary"><AppleIcon />Download for Mac</a><a href="/pricing/" class="btn-secondary">Pricing</a></div>
+    <GatekeeperNote class="mt-4 max-w-md" />
     <div class="mt-16 max-w-4xl"><AppWindow /></div>
     <div class="mt-16 grid gap-4 md:grid-cols-3">
       {c.points.map(([t, d]) => <article class="card"><h2 class="text-lg tracking-[-0.02em]">{t}</h2><p class="mt-2 text-sm">{d}</p></article>)}

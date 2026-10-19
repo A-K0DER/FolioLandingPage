@@ -2,14 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
 import AppleIcon from '../components/AppleIcon.astro';
+import GatekeeperNote from '../components/GatekeeperNote.astro';
 const date = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(site.releaseDate));
 ---
-<Layout title="Download Folio for Mac" description={`Download Folio ${site.version} for ${site.minMacOS} or later.`}>
+<Layout title="Download Folio: Mac Finder Alternative and File Manager" description={`Download Folio ${site.version}, the tabbed Mac file manager and Finder alternative for ${site.minMacOS} or later. One-time ${site.price.label}, no subscription. Step-by-step install guide included.`}>
   <section class="container-x max-w-3xl py-24">
     <p class="eyebrow">Download</p>
     <h1 class="display mt-4 !text-5xl sm:!text-6xl">Download <span translate="no">{site.name}</span> for&nbsp;Mac.</h1>
     <p class="lead mt-5">Version {site.version} · {date}.</p>
     <div class="mt-8 flex flex-col gap-3 sm:flex-row"><a href={site.downloadUrl} class="btn-primary"><AppleIcon />Download .dmg</a><a href={site.checkoutUrl} class="btn-secondary">Buy a License</a></div>
+    <GatekeeperNote class="mt-4 max-w-md" />
     <dl class="mt-12 divide-y divide-hairline rounded-md border border-hairline bg-elevated text-sm">
       {[['Requires', `${site.minMacOS} or later`], ['Price', `${site.price.label} per license (one Mac)`]].map(([k, v]) => (
         <div class="flex justify-between gap-4 px-5 py-3"><dt class="text-mute">{k}</dt><dd class="text-ink">{v}</dd></div>

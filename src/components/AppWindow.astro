@@ -3,13 +3,14 @@
 const side = ['Desktop', 'Documents', 'Downloads', 'External Drive ⏏'];
 const rows = [['Receipts','folder','—'],['Design','folder','—'],['invoice-2026.pdf','file','212 KB'],['notes.md','file','4 KB'],['release.zip','zip','48 MB']];
 ---
-<div class="overflow-hidden rounded-lg border border-hairline bg-elevated shadow-float" role="img" aria-label="Illustration of Folio's file manager window">
+<div class="overflow-hidden rounded-lg border border-hairline bg-elevated shadow-float" role="img" aria-label="Folio, a tabbed Mac file manager with an Explorer-style layout: tabs, a clickable address bar, a sidebar with drives and eject, a details pane and a status bar">
   <div class="flex items-center gap-2 border-b border-hairline px-4 py-3">
     <span class="size-3 rounded-full bg-[#ff5f57]"></span><span class="size-3 rounded-full bg-[#febc2e]"></span><span class="size-3 rounded-full bg-[#28c840]"></span>
     <span class="mx-auto font-mono text-xs text-mute">Folio</span>
   </div>
   <div class="flex items-center gap-2 border-b border-hairline-soft bg-canvas px-4 py-2 font-mono text-xs text-body">
     <span class="rounded-sm border border-hairline bg-elevated px-2 py-0.5 text-ink">Documents</span><span class="text-mute">+</span>
+    <span class="hidden items-center gap-1 text-mute sm:flex">Macintosh HD › Users › you › <span class="text-ink">Documents</span></span>
     <span class="ml-auto min-w-0 truncate rounded-sm border border-hairline bg-elevated px-2 py-0.5 text-mute">pdfs bigger than 10 MB modified last week</span>
   </div>
   <div class="grid grid-cols-[8rem_1fr] sm:grid-cols-[9rem_1fr_11rem]">
