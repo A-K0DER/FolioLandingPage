@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import AppWindow from '../components/AppWindow.astro';
 import CTA from '../components/CTA.astro';
 import AppleIcon from '../components/AppleIcon.astro';
-import GatekeeperNote from '../components/GatekeeperNote.astro';
 import { site, featurePages } from '../data/site';
 
 const pillars = [
@@ -27,7 +26,7 @@ const faqs = [
   ['How is Folio different from Commander One, ForkLift, Path Finder or Marta?', 'Those are established Mac file managers with their own strengths. Folio focuses on plain-English search, safe file operations and a familiar Explorer-style layout, with the price shown up front. See our Commander One comparison for details.'],
   ['Is there a Windows Explorer for Mac?', 'Folio is the closest thing: an Explorer-style file manager for Mac with tabs, a clickable address bar, a sidebar with drives and eject, a details pane and a status bar.'],
   ['Does Folio have a subscription?', `No. Folio is a one-time purchase of ${site.price.label} per license, for one Mac. You can move the license to another Mac by deactivating the first.`],
-  ['Why does macOS say Folio is from an unidentified developer?', 'Folio is made by a solo indie developer and is not yet notarized by Apple, so macOS shows a warning on first launch. It is expected. Right-click Folio, choose Open, then Open again. On newer macOS versions, use Open Anyway in System Settings. See the install guide on the download page.'],
+  ['Why does macOS say Folio is from an unidentified developer?', 'Folio is made by one indie developer. Apple charges $99/year to remove this warning, and I\'ll pay it from the first sales. Until then, macOS shows a warning on first launch. On macOS 15 (Sequoia) and later, try to open Folio once, then go to System Settings → Privacy & Security and click Open Anyway. On macOS 14 or earlier, right-click Folio and choose Open, then Open again. See the install guide on the download page.'],
   ['Can I still use Finder?', 'Yes. Folio sits alongside Finder, so you can use either whenever you like.'],
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
@@ -44,7 +43,6 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
       </div>
       <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license · {site.price.label} once</p>
-      <GatekeeperNote class="mx-auto mt-2 max-w-md" />
     </div>
     <div class="container-x relative max-w-5xl pb-24"><AppWindow /></div>
   </section>
@@ -138,7 +136,7 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <h3 class="pt-4 text-xl tracking-[-0.02em] text-ink">Pricing</h3>
         <p>If you are searching for a free or open-source Mac Finder alternative, note that <span translate="no">{site.name}</span> is commercial software. It is a one-time {site.price.label} license, sold directly with no App Store account needed. It runs on {site.minMacOS} or later.</p>
 
-        <p>Ready to switch? <a href="/download/" class="text-link underline underline-offset-4">Download {site.name} for Mac</a> (unsigned for now, so right-click and choose Open the first time) and see whether it is the file manager you have been missing, or read how it works on the <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Finder alternative</a> feature page.</p>
+        <p>Ready to switch? <a href="/download/" class="text-link underline underline-offset-4">Download {site.name} for Mac</a> (unsigned for now, so you will need to click Open Anyway in System Settings the first time) and see whether it is the file manager you have been missing, or read how it works on the <a href="/features/finder-alternative/" class="text-link underline underline-offset-4">Finder alternative</a> feature page.</p>
       </div>
 
       <h2 class="h2 mt-16">Frequently asked questions</h2>

@@ -2,4 +2,4 @@
 interface Props { class?: string }
 const { class: cls = '' } = Astro.props;
 ---
-<p class:list={['text-sm leading-6 text-mute', cls]}>New app from an indie developer, so macOS may say "unidentified developer". Right-click <span translate="no">Folio</span>, choose <em>Open</em>, then <em>Open</em> again. <a href="/download/#install" class="text-link underline underline-offset-4">Step-by-step guide</a></p>
+<p class:list={['text-sm leading-6 text-mute', cls]}>New app from an indie developer, so macOS may say "unidentified developer". Open <span translate="no">Folio</span> once, then go to <em>System Settings → Privacy &amp; Security</em> and click <em>Open Anyway</em>. On macOS 14 or earlier, right-click the app and choose <em>Open</em>. <a href="/download/#install" class="text-link underline underline-offset-4">Step-by-step guide</a></p>
