@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
 import AppleIcon from '../components/AppleIcon.astro';
+import RefundBadge from '../components/RefundBadge.astro';
 import { site, featurePages } from '../data/site';
 
 const pillars = [
@@ -41,7 +42,8 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <a href="/download/" class="btn-primary w-full sm:w-auto"><AppleIcon />Download for Mac</a>
         <a href="/pricing/" class="btn-secondary w-full sm:w-auto">Buy for {site.price.label}</a>
       </div>
-      <p class="mt-4 text-sm text-mute">{site.minMacOS} or later · one Mac per license · <s aria-label={`regular price ${site.price.regularLabel}`}>{site.price.regularLabel}</s> {site.price.label} once, launch offer for the first {site.price.launchLimit}</p>
+      <RefundBadge class="mt-4 justify-center" />
+      <p class="mt-3 text-sm text-mute">{site.minMacOS} or later · one Mac per license · <s aria-label={`regular price ${site.price.regularLabel}`}>{site.price.regularLabel}</s> {site.price.label} once, launch offer for the first {site.price.launchLimit}</p>
     </div>
     <div class="container-x relative max-w-5xl pb-24">
       <video class="aspect-video w-full rounded-2xl border border-hairline bg-black" controls playsinline preload="metadata" poster="/video/folio-intro-poster.png" aria-label={`${site.name} product tour: tabs, plain-English search, storage breakdown and undo`}>
