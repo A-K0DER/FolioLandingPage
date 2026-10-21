@@ -7,6 +7,17 @@ export const site = {
   tagline: 'The file manager Finder should have been.',
   description:
     'Folio is a Mac Finder alternative: a file manager for macOS with plain-English search, safe file operations, tabs, Quick Open and archive support.',
+  keywords: [
+    'Mac Finder alternative',
+    'file manager for Mac',
+    'mac apps',
+    'mac tools',
+    'productivity tools for mac',
+    'apps for mac',
+    'best apps for mac',
+    'uninstall apps mac',
+    'uninstall mac apps',
+  ],
   version: '1.0.0', // TODO
   minMacOS: 'macOS 14', 
   releaseDate: '2026-10-01', // TODO
@@ -351,6 +362,34 @@ export const guides = [
     faqs: [
       ['How do I group files by kind in Finder?', 'Choose View > Group By > Kind.'],
       ['How many categories does Folio use?', 'Ten kinds, including Videos, Images and PDFs.'],
+    ],
+  },
+  {
+    slug: 'uninstall-mac-apps', title: 'How to Uninstall Mac Apps and Remove Leftover Files',
+    desc: 'Uninstall apps on Mac the right way: drag to the Trash, use Launchpad, run an app uninstaller and clear leftover files from your Library folder.',
+    h1: 'How to uninstall apps on your Mac.',
+    intro: 'Removing an app takes a few seconds, but it can leave settings and cache files behind. Here is how to uninstall Mac apps and clean up after them.',
+    finder: [
+      'Quit the app first (⌘Q). If it will not close, force quit it with Option ⌥ + Command ⌘ + Esc.',
+      'Open Finder and press Shift ⇧ + Command ⌘ + A to open the Applications folder.',
+      'Drag the app to the Trash, or select it and press Command ⌘ + Delete. Enter your password if asked.',
+      'Apps installed from the App Store can also be removed in Launchpad: hold Option ⌥ until the icons wiggle, then click the X.',
+      'If the app came with its own uninstaller, run that instead of dragging it to the Trash.',
+      'To remove leftovers, click Go in the menu bar, hold Option ⌥ and choose Library. Look in Application Support, Caches and Preferences for folders named after the app and move them to the Trash.',
+      'Right-click the Trash in the Dock and choose Empty Trash to free the space.',
+    ],
+    folio: [
+      'Open the Applications folder in Folio and select the app you want to remove.',
+      'Check the size in the details pane, and open the Storage Breakdown on a folder to see what is using the most space.',
+      'Press Command ⌘ + Delete. The app goes to the Trash rather than being erased straight away.',
+      'Changed your mind? Undo the operation to bring the app back.',
+    ],
+    feature: 'safe-file-operations',
+    faqs: [
+      ['What is the best way to uninstall apps on Mac?', 'For most apps, quit them and drag them from Applications to the Trash. Use the app\'s own uninstaller if it came with one.'],
+      ['Does dragging an app to the Trash remove everything?', 'It removes the app itself. Settings and cache files may stay in your Library folder. They are small, but you can delete them by hand.'],
+      ['Is it safe to delete files from the Library folder?', 'Only delete items clearly named after the app you removed. Leave everything else alone, since macOS and other apps depend on it.'],
+      ['Why can I not uninstall an app on Mac?', 'It is usually still running. Quit or force quit it and try again. Apps managed by your organisation may need an administrator.'],
     ],
   },
 ] as const;
