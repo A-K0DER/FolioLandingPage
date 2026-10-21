@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import { macBasics } from '../../data/site';
+---
+<Layout title="Mac Basics for Beginners" description="New to Mac? Simple step-by-step guides: take a screenshot, record your screen, force quit an app, show hidden files, zip files and more.">
+  <section class="container-x max-w-3xl py-24">
+    <p class="eyebrow">Mac basics</p>
+    <h1 class="display mt-4 !text-5xl sm:!text-6xl">Mac basics for beginners.</h1>
+    <p class="lead mt-5">New to Mac? Plain, step-by-step answers to the things everyone searches for first, with the keyboard shortcuts to remember.</p>
+    <ul class="mt-12 grid gap-3 sm:grid-cols-2">
+      {macBasics.map((g) => <li><a href={`/mac-basics/${g.slug}/`} class="card block transition-colors hover:bg-hairline-soft"><span class="text-base font-medium text-ink">{g.title}</span></a></li>)}
+    </ul>
+    <p class="mt-10 text-base leading-7">Looking for file management help? See the <a href="/guides/" class="text-link underline underline-offset-4">file management guides</a>.</p>
+  </section>
+  <CTA />
+</Layout>

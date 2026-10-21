@@ -11,6 +11,7 @@ import { guides } from '../../data/site';
     <ul class="mt-12 grid gap-3 sm:grid-cols-2">
       {guides.map((g) => <li><a href={`/guides/${g.slug}/`} class="card block transition-colors hover:bg-hairline-soft"><span class="text-base font-medium text-ink">{g.title}</span></a></li>)}
     </ul>
+    <p class="mt-10 text-base leading-7">New to Mac? See <a href="/mac-basics/" class="text-link underline underline-offset-4">Mac basics for beginners</a>: screenshots, screen recording and more.</p>
   </section>
   <CTA />
 </Layout>
