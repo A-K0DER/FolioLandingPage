@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import CTA from '../components/CTA.astro';
 import RefundBadge from '../components/RefundBadge.astro';
 import { site } from '../data/site';
-const inc = ['Plain-English search and Quick Open', 'Tabs, details pane and operations queue', 'Archive extraction (ZIP, TAR, 7Z)', 'One Mac per license, movable by deactivating', 'Sold directly, no App Store', 'No analytics or tracking'];
+const inc = ['On-device Assistant (macOS 26+ with Apple Intelligence)', 'Plain-English search and Quick Open', 'Tabs, details pane and operations queue', 'Archive extraction (ZIP, TAR, 7Z)', 'One Mac per license, movable by deactivating', 'Sold directly, no App Store', 'No analytics or tracking'];
 const jsonLd = { '@context': 'https://schema.org', '@type': 'Product', name: `${site.name} for Mac`, description: site.description, offers: { '@type': 'Offer', price: site.price.amount, priceCurrency: site.price.currency, availability: 'https://schema.org/InStock', url: `${site.url}/pricing/` } };
 ---
 <Layout title="Pricing" description={`Folio is a one-time ${site.price.label} license, one Mac per license, sold directly.`} jsonLd={jsonLd}>

@@ -74,6 +74,7 @@ export const footer = [
 
 export const featurePages = [
   { slug: 'finder-alternative', title: 'Finder Alternative', blurb: 'An Explorer-style layout with tabs, address bar, sidebar and details pane.' },
+  { slug: 'assistant', title: 'Assistant', blurb: 'Chat with your files using Apple’s on-device model. Nothing changes until you click Approve.' },
   { slug: 'search', title: 'Plain-English Search', blurb: 'Type "pdfs bigger than 10 MB modified last week" and get results.' },
   { slug: 'safe-file-operations', title: 'Safe File Operations', blurb: 'Trash on delete, verified moves, and undo for every operation.' },
   { slug: 'archives', title: 'Archives', blurb: 'Look inside ZIP, TAR and 7Z, then extract.' },

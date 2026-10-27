@@ -6,9 +6,10 @@ import RefundBadge from '../components/RefundBadge.astro';
 import { site, featurePages } from '../data/site';
 
 const pillars = [
+  { t: 'On-device Assistant', d: 'Chat with your files using Apple’s on-device model. Nothing changes until you click Approve. Needs macOS 26+ with Apple Intelligence.' },
   { t: 'Search in plain English', d: '"pdfs bigger than 10 MB modified last week", on a folder or This Mac, with removable filter chips. Searches file names only.' },
   { t: 'Your files stay safe', d: 'Delete goes to the Trash, nothing is overwritten silently, and every operation can be undone.' },
-  { t: 'Quick Open', d: 'Press ⌘P and jump to any folder by typing a few letters.' },
+  { t: 'Quick Open and Quick Look', d: 'Press ⌘P and jump to any folder by typing a few letters, and preview files without opening them.' },
   { t: 'Archives', d: 'Extract ZIP, TAR and 7Z, and look inside them before extracting.' },
   { t: 'Explorer-style layout', d: 'Tabs, a clickable address bar, a sidebar with drives and eject, a status bar and a details pane.' },
   { t: 'Storage breakdown', d: 'See what is filling a folder, split by category, right in the details pane.' },
@@ -27,6 +28,7 @@ const faqs = [
   ['Is there a Windows Explorer for Mac?', 'Folio is the closest thing: an Explorer-style file manager for Mac with tabs, a clickable address bar, a sidebar with drives and eject, a details pane and a status bar.'],
   ['Does Folio have a subscription?', `No. Folio is a one-time purchase of ${site.price.label} per license, for one Mac. You can move the license to another Mac by deactivating the first.`],
   ['Why does macOS say Folio is from an unidentified developer?', 'Folio is made by one indie developer. Apple charges $99/year to remove this warning, and I\'ll pay it from the first sales. Until then, macOS shows a warning on first launch. On macOS 15 (Sequoia) and later, try to open Folio once, then go to System Settings → Privacy & Security and click Open Anyway. On macOS 14 or earlier, right-click Folio and choose Open, then Open again. See the install guide on the download page.'],
+  ['What is the Folio Assistant?', 'A chat that runs entirely on Apple’s on-device model. It can look at the folder you have open and read the files you ask about. It needs macOS 26 or later with Apple Intelligence turned on, while the rest of Folio runs on macOS 14 or later. Nothing changes until you click Approve.'],
   ['Can I still use Finder?', 'Yes. Folio sits alongside Finder, so you can use either whenever you like.'],
 ];
 const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
@@ -67,6 +69,27 @@ const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity
         <li><strong class="text-ink">Details pane and status bar.</strong> Size, dates and item counts stay on screen, so you never open Get Info just to check a file.</li>
         <li><strong class="text-ink">Storage breakdown.</strong> A folder size analyzer for Mac, built in: see which categories use the space, without leaving the folder.</li>
       </ul>
+    </div>
+  </section>
+
+  <section class="border-t border-hairline" aria-labelledby="assistant">
+    <div class="container-x grid gap-10 py-24 lg:grid-cols-2 lg:items-start">
+      <div>
+        <p class="eyebrow">The Assistant</p>
+        <h2 id="assistant" class="h2 mt-3">Talk to your files. They never leave your Mac.</h2>
+        <p class="lead mt-4">A chat that runs entirely on Apple’s on-device model. It can look at the folder you have open and read the files you ask about. Needs macOS 26 or later with Apple Intelligence turned on.</p>
+        <p class="mt-4 text-sm leading-6">One-click shortcuts cover the common jobs: large, recent, old and empty files, screenshots, group by type or date, organize, find duplicates, storage, merge PDFs and extract text.</p>
+        <div class="mt-6"><a href="/features/assistant/" class="btn-sm">How the Assistant works</a></div>
+      </div>
+      <div class="space-y-3 text-base leading-7">
+        <ul class="space-y-2">
+          <li>“What’s taking up space in Downloads?”</li>
+          <li>“Find the duplicates in this folder.”</li>
+          <li>“What’s in this PDF?”</li>
+          <li>“Sort these screenshots into folders by month.”</li>
+        </ul>
+        <p class="pt-4 text-sm leading-6"><strong class="text-ink">Nothing changes until you click Approve.</strong> Delete means Trash, nothing is overwritten without asking, and every operation can be undone. No cloud, no account.</p>
+      </div>
     </div>
   </section>
 
